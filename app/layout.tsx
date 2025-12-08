@@ -52,6 +52,14 @@ export default function RootLayout({
         <ScrollProgress />
         <FloatingActionButton />
         <div className="relative z-10 w-full">{children}</div>
+
+        <script 
+          async 
+          src="https://navlens-rho.vercel.app/tracker.js" 
+          data-site-id="a2ec32a6-21bb-4bdc-b89e-c09145df7fac"
+          data-api-key="89c0fb13-a17e-4b96-8d59-8fba10f51fed"
+          data-api-host="https://navlens-rho.vercel.app"
+        ></script>
       </body>
     </html>
   );

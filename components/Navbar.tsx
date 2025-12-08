@@ -55,7 +55,7 @@ export default function Navbar() {
                 alt="Synapse Digital Logo"
                 width={140}
                 height={140}
-                className="w-20 h-28 md:w-32 md:h-20 object-contain"
+                className="w-15 h-15 md:w-32 md:h-20 object-contain"
               />
             </motion.div>{" "}
             {/* Desktop Navigation */}
