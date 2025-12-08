@@ -2,7 +2,7 @@
 
 import { motion, useMotionValue, useTransform, PanInfo } from "framer-motion";
 import { ReactNode, useState, useEffect } from "react";
-import { ChevronDown, ExternalLink } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 // Swipeable Card Component
 interface SwipeableCardProps {
