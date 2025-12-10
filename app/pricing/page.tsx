@@ -25,7 +25,7 @@ export default function PricingPage() {
   const webPackages = [
     {
       name: "Landing Page",
-      price: "$999 - $1,999",
+      price: "$50 - $200",
       description:
         "Perfect for product launches, lead generation, or ad campaigns",
       features: [
@@ -43,7 +43,7 @@ export default function PricingPage() {
     },
     {
       name: "Business Website",
-      price: "$2,999 - $4,999",
+      price: "$150 - $400",
       description: "Complete website for small to medium businesses",
       features: [
         "5-10 custom pages",
@@ -62,7 +62,7 @@ export default function PricingPage() {
     },
     {
       name: "E-Commerce Store",
-      price: "$5,999 - $9,999",
+      price: "$200 - $500",
       description: "Full online store with payment processing",
       features: [
         "Up to 100 products",
@@ -81,7 +81,7 @@ export default function PricingPage() {
     },
     {
       name: "Custom Application",
-      price: "$10,000+",
+      price: "$800+",
       description: "Complex web apps, portals, booking systems, dashboards",
       features: [
         "100% custom features",
@@ -104,7 +104,7 @@ export default function PricingPage() {
   const monthlyPackages = [
     {
       name: "Social Media - Starter",
-      price: "$999/month",
+      price: "$199/month",
       description: "For businesses just starting with social media",
       features: [
         "12 posts per month (3/week)",
@@ -119,7 +119,7 @@ export default function PricingPage() {
     },
     {
       name: "Social Media - Growth",
-      price: "$1,999/month",
+      price: "$299/month",
       description: "Serious about growing your social presence",
       features: [
         "20 posts per month (5/week)",
@@ -135,7 +135,7 @@ export default function PricingPage() {
     },
     {
       name: "SEO - Local",
-      price: "$799/month",
+      price: "$399/month",
       description: "Rank in your city for local services",
       features: [
         "Google Business optimization",
@@ -150,7 +150,7 @@ export default function PricingPage() {
     },
     {
       name: "SEO - National",
-      price: "$1,999/month",
+      price: "$499/month",
       description: "Rank nationally for competitive keywords",
       features: [
         "30+ keyword targets",
