@@ -8,21 +8,20 @@ export default function Footer() {
 
   const links = {
     services: [
-      { name: "Web Solutions", href: "#services" },
-      { name: "NavLens Analytics", href: "#navlens" },
-      { name: "Social Media", href: "#social" },
-      { name: "SEO & Growth", href: "#seo" },
+      { name: "Web Solutions", href: "/services" },
+      { name: "NavLens Analytics", href: "/services#navlens" },
+      { name: "Social Media", href: "/social-media-management" },
+      { name: "Pricing", href: "/pricing" },
     ],
     company: [
-      { name: "About Us", href: "#about" },
-      { name: "Our Work", href: "#work" },
-      { name: "Careers", href: "#careers" },
-      { name: "Contact", href: "#contact" },
+      { name: "About Us", href: "/#about" },
+      { name: "Our Work", href: "/projects" },
+      { name: "Contact", href: "/contact" },
     ],
     legal: [
-      { name: "Privacy Policy", href: "#privacy" },
-      { name: "Terms of Service", href: "#terms" },
-      { name: "Cookie Policy", href: "#cookies" },
+      { name: "Privacy Policy", href: "/privacy" },
+      { name: "Terms of Service", href: "/terms" },
+      { name: "Refund Policy", href: "/refund-policy" },
     ],
   };
 
@@ -36,7 +35,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-transparent border-t border-synapse-blue/20 backdrop-blur-sm">
       <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <motion.div
@@ -74,6 +73,71 @@ export default function Footer() {
                 })}
               </div>
             </motion.div>
+          </div>
+
+          {/* Contact Column */}
+          <div>
+            <h3 className="text-signal-white font-bold mb-4">Contact</h3>
+            <ul className="space-y-2">
+              <motion.li
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <a
+                  href="mailto:info@synapsedigital.dev"
+                  className="text-circuit-silver hover:text-synapse-blue transition-colors duration-300 text-sm"
+                >
+                  info@synapsedigital.dev
+                </a>
+              </motion.li>
+              <motion.li
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.05 }}
+                viewport={{ once: true }}
+              >
+                <a
+                  href="tel:+94774671009"
+                  className="text-circuit-silver hover:text-synapse-blue transition-colors duration-300 text-sm"
+                >
+                  +94 77 467 1009
+                </a>
+              </motion.li>
+              <motion.li
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 }}
+                viewport={{ once: true }}
+              >
+                <a
+                  href="tel:+94789910287"
+                  className="text-circuit-silver hover:text-synapse-blue transition-colors duration-300 text-sm"
+                >
+                  +94 78 991 0287
+                </a>
+              </motion.li>
+              <motion.li
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.15 }}
+                viewport={{ once: true }}
+              >
+                <span className="text-circuit-silver text-sm">
+                  Kirulapone, Colombo 5
+                </span>
+              </motion.li>
+              <motion.li
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <span className="text-circuit-silver text-sm">
+                  24/7 - All Days
+                </span>
+              </motion.li>
+            </ul>
           </div>
 
           {/* Services Column */}

@@ -59,9 +59,7 @@ export function BottomSheet({
   isOpen,
   onClose,
   children,
-  snapPoints = [0.5, 0.9],
 }: BottomSheetProps) {
-  const [snapIndex, setSnapIndex] = useState(0);
   const y = useMotionValue(0);
 
   const handleDragEnd = (

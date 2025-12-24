@@ -103,6 +103,7 @@ export default function Navbar() {
               className="md:hidden text-[#ffffff] p-2 hover:text-synapse-blue transition-colors relative"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
+              aria-label="Toggle mobile menu"
             >
               <motion.div
                 animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}

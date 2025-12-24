@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 
 interface TypewriterProps {
@@ -27,7 +27,7 @@ export default function Typewriter({
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const texts = Array.isArray(text) ? text : [text];
+  const texts = useMemo(() => Array.isArray(text) ? text : [text], [text]);
   const currentText = texts[currentTextIndex];
 
   useEffect(() => {

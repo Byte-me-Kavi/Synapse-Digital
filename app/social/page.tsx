@@ -264,7 +264,7 @@ export default function SocialMediaPage() {
                             What&apos;s Included:
                           </div>
                           <ul className="space-y-2">
-                            {service.features.map((feature, i) => (
+                            {service.features.map((feature) => (
                               <li
                                 key={feature}
                                 className="flex items-start text-circuit-silver text-sm"

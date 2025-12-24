@@ -7,162 +7,113 @@ import {
   Code,
   Share2,
   TrendingUp,
-  Zap,
-  Star,
+  BarChart3,
+  Palette,
+  CheckCircle2,
+  MessageCircle,
 } from "lucide-react";
 import ParticleBackground from "@/components/ParticleBackground";
 import GlassCard from "@/components/GlassCard";
 import Button from "@/components/Button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useState } from "react";
 
 export default function PricingPage() {
-  const [billingPeriod, setBillingPeriod] = useState<"monthly" | "project">(
-    "project"
-  );
-
-  const webPackages = [
+  const serviceCategories = [
     {
-      name: "Landing Page",
-      price: "$50 - $200",
-      description:
-        "Perfect for product launches, lead generation, or ad campaigns",
-      features: [
-        "1 high-converting page",
-        "Mobile responsive design",
-        "Contact form integration",
-        "Fast loading (under 1 second)",
-        "Basic SEO setup",
-        "1-2 week delivery",
-        "1 month free support",
-      ],
-      icon: Zap,
-      color: "#FFD700",
-      popular: false,
-    },
-    {
-      name: "Business Website",
-      price: "$150 - $400",
-      description: "Complete website for small to medium businesses",
-      features: [
-        "5-10 custom pages",
-        "Professional design",
-        "Contact forms & integrations",
-        "Google Maps integration",
-        "SEO optimized for Google",
-        "Mobile responsive",
-        "4-6 week delivery",
-        "3 months free support",
-        "Free SSL certificate",
-      ],
+      name: "Web Solutions",
       icon: Code,
+      services: [
+        "Landing Pages",
+        "E-Commerce Websites",
+        "Business Websites",
+        "Portfolio Sites",
+        "Custom Web Applications",
+        "Website Redesigns",
+        "Website Updates",
+      ],
       color: "#00C2FF",
-      popular: true,
     },
     {
-      name: "E-Commerce Store",
-      price: "$200 - $500",
-      description: "Full online store with payment processing",
-      features: [
-        "Up to 100 products",
-        "Stripe/PayPal integration",
-        "Shopping cart & checkout",
-        "Inventory management",
-        "Customer accounts",
-        "Order tracking system",
-        "6-8 week delivery",
-        "6 months free support",
-        "Email marketing setup",
+      name: "Social Media Management",
+      icon: Share2,
+      services: [
+        "Social Media Posts",
+        "Reels & Short Videos",
+        "AI-Generated Videos",
+        "Presentation Videos",
+        "Cover & Banner Design",
+        "Profile Picture Design",
+        "Content Graphics",
       ],
-      icon: Zap,
-      color: "#00FF88",
-      popular: false,
-    },
-    {
-      name: "Custom Application",
-      price: "$800+",
-      description: "Complex web apps, portals, booking systems, dashboards",
-      features: [
-        "100% custom features",
-        "User authentication & roles",
-        "Admin dashboard",
-        "API integrations",
-        "Database design",
-        "Cloud hosting setup",
-        "8-12 week delivery",
-        "12 months support included",
-        "Unlimited revisions",
-        "Dedicated project manager",
-      ],
-      icon: Code,
       color: "#FF0080",
-      popular: false,
+    },
+    {
+      name: "Marketing & SEO",
+      icon: TrendingUp,
+      services: [
+        "SEO Optimization",
+        "Advertisement Campaigns",
+        "Paid Ads Management",
+        "Social Media SEO",
+        "Google Ads",
+        "Meta Ads (Facebook/Instagram)",
+        "TikTok Ads",
+      ],
+      color: "#00FF88",
+    },
+    {
+      name: "Analytics & Reporting",
+      icon: BarChart3,
+      services: [
+        "Navlens Analytics Integration",
+        "Website Analytics Reports",
+        "Social Media Reports",
+        "Performance Monitoring",
+        "Conversion Tracking",
+        "User Behavior Analysis",
+      ],
+      color: "#FFD700",
+    },
+    {
+      name: "Design Services",
+      icon: Palette,
+      services: [
+        "Logo Design",
+        "Brand Identity",
+        "Social Media Graphics",
+        "Marketing Materials",
+        "Infographics",
+        "UI/UX Design",
+      ],
+      color: "#00C2FF",
     },
   ];
 
-  const monthlyPackages = [
+  const pricingFactors = [
     {
-      name: "Social Media - Starter",
-      price: "$199/month",
-      description: "For businesses just starting with social media",
-      features: [
-        "12 posts per month (3/week)",
-        "2 platforms (Instagram + Facebook)",
-        "Content creation & graphics",
-        "Hashtag research",
-        "Monthly performance report",
-        "3-month minimum commitment",
-      ],
-      icon: Share2,
-      color: "#FF0080",
-    },
-    {
-      name: "Social Media - Growth",
-      price: "$299/month",
-      description: "Serious about growing your social presence",
-      features: [
-        "20 posts per month (5/week)",
-        "3 platforms (+ TikTok or YouTube)",
-        "Stories & Reels content",
-        "Community management",
-        "Bi-weekly strategy calls",
-        "Competitor analysis",
-        "3-month minimum commitment",
-      ],
-      icon: Share2,
-      color: "#00FF88",
-    },
-    {
-      name: "SEO - Local",
-      price: "$399/month",
-      description: "Rank in your city for local services",
-      features: [
-        "Google Business optimization",
-        "Local keyword targeting",
-        "2 SEO blog posts/month",
-        "Citation building",
-        "Monthly ranking reports",
-        "6-month minimum commitment",
-      ],
-      icon: TrendingUp,
+      icon: CheckCircle2,
+      title: "Project Scope",
+      description: "Number of pages, features, and complexity of your requirements",
       color: "#00C2FF",
     },
     {
-      name: "SEO - National",
-      price: "$499/month",
-      description: "Rank nationally for competitive keywords",
-      features: [
-        "30+ keyword targets",
-        "Technical optimization",
-        "4 SEO blog posts/month",
-        "Link building campaign",
-        "Competitor analysis",
-        "Weekly progress reports",
-        "6-month minimum commitment",
-      ],
-      icon: TrendingUp,
+      icon: CheckCircle2,
+      title: "Timeline",
+      description: "How quickly you need the project completed",
       color: "#00FF88",
+    },
+    {
+      icon: CheckCircle2,
+      title: "Customization",
+      description: "Level of custom features and integrations needed",
+      color: "#FF0080",
+    },
+    {
+      icon: CheckCircle2,
+      title: "Ongoing Support",
+      description: "Maintenance, updates, and support requirements",
+      color: "#FFD700",
     },
   ];
 
@@ -173,7 +124,7 @@ export default function PricingPage() {
         <ParticleBackground className="fixed inset-0 -z-10" />
 
         {/* Hero Section */}
-        <section className="relative min-h-[60vh] flex items-center justify-center w-full px-6 sm:px-8 lg:px-12 pt-32 pb-16">
+        <section className="relative min-h-[70vh] flex items-center justify-center w-full px-6 sm:px-8 lg:px-12 pt-32 pb-16">
           <div className="w-full max-w-[1400px] mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -181,216 +132,189 @@ export default function PricingPage() {
               transition={{ duration: 0.8 }}
             >
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6">
-                <span className="text-signal-white">Simple, Honest </span>
+                <span className="text-signal-white">Fair & Transparent </span>
                 <span className="text-synapse-blue">Pricing</span>
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl text-circuit-silver max-w-3xl mx-auto mb-10">
-                No hidden fees. No surprises. Just clear pricing for quality
-                work.
+                Every project is unique. We provide the best and fairest price based on your specific requirements.
               </p>
 
-              {/* Billing Toggle */}
-              <div className="flex items-center justify-center gap-4 mb-12">
-                <button
-                  onClick={() => setBillingPeriod("project")}
-                  className={`px-6 py-3 rounded-lg font-semibold transition-all ${
-                    billingPeriod === "project"
-                      ? "bg-synapse-blue text-void-black"
-                      : "glass-dark text-circuit-silver hover:text-synapse-blue"
-                  }`}
+              {/* Key Message Box */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="max-w-4xl mx-auto"
+              >
+                <GlassCard 
+                  variant="dark" 
+                  className="p-8 md:p-12 border-synapse-blue/30"
                 >
-                  Website Projects
-                </button>
-                <button
-                  onClick={() => setBillingPeriod("monthly")}
-                  className={`px-6 py-3 rounded-lg font-semibold transition-all ${
-                    billingPeriod === "monthly"
-                      ? "bg-synapse-blue text-void-black"
-                      : "glass-dark text-circuit-silver hover:text-synapse-blue"
-                  }`}
-                >
-                  Monthly Services
-                </button>
-              </div>
+                  <div className="flex flex-col items-center gap-6">
+                    <div className="p-4 rounded-2xl bg-synapse-blue/20 backdrop-blur-sm">
+                      <MessageCircle className="h-12 w-12 text-synapse-blue" />
+                    </div>
+                    <div className="text-center">
+                      <h2 className="text-2xl md:text-3xl font-bold text-signal-white mb-4">
+                        No One-Size-Fits-All Packages
+                      </h2>
+                      <p className="text-base md:text-lg text-circuit-silver leading-relaxed max-w-2xl mx-auto mb-6">
+                        Whether it&apos;s web development, social media management, SEO, or any service we offer - we believe in understanding your unique needs first. Then, we provide a custom quote that&apos;s fair, transparent, and tailored to deliver maximum value for your investment.
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="/contact">
+                          <Button size="lg" variant="primary" className="px-8 py-4">
+                            Get Custom Quote
+                            <ArrowRight className="ml-2 h-5 w-5" />
+                          </Button>
+                        </a>
+                        <a href="/services">
+                          <Button size="lg" variant="ghost" className="px-8 py-4">
+                            View All Services
+                          </Button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </GlassCard>
+              </motion.div>
             </motion.div>
           </div>
         </section>
 
-        {/* Website Projects */}
-        {billingPeriod === "project" && (
-          <section className="relative w-full py-20 px-6 sm:px-8 lg:px-12">
-            <div className="w-full max-w-[1400px] mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {webPackages.map((pkg, index) => {
-                  const Icon = pkg.icon;
-                  return (
-                    <motion.div
-                      key={pkg.name}
-                      initial={{ opacity: 0, y: 50 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
+        {/* Services We Offer Section */}
+        <section className="relative w-full py-20 px-6 sm:px-8 lg:px-12 bg-linear-to-b from-void-black via-data-dark-blue/10 to-void-black">
+          <div className="w-full max-w-[1400px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+                Services <span className="text-synapse-blue">We Offer</span>
+              </h2>
+              <p className="text-base md:text-lg text-circuit-silver max-w-2xl mx-auto">
+                Comprehensive digital solutions customized to your business needs
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {serviceCategories.map((category, index) => {
+                const Icon = category.icon;
+                return (
+                  <motion.div
+                    key={category.name}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <GlassCard
+                      variant="dark"
+                      className="h-full p-6 hover:border-synapse-blue/50 transition-all"
                     >
-                      <GlassCard
-                        variant="dark"
-                        className={`h-full relative ${
-                          pkg.popular ? "border-synapse-blue border-2" : ""
-                        }`}
+                      <div
+                        className="p-3 rounded-xl w-fit mb-4"
+                        style={{
+                          backgroundColor: `${category.color}20`,
+                          boxShadow: `0 0 30px ${category.color}30`,
+                        }}
                       >
-                        {pkg.popular && (
-                          <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                            <div className="bg-synapse-blue text-void-black px-4 py-1 rounded-full text-sm font-bold flex items-center gap-1">
-                              <Star className="h-3 w-3" /> MOST POPULAR
-                            </div>
-                          </div>
-                        )}
-                        <div className="p-8 space-y-6">
-                          <div className="flex items-start justify-between">
-                            <div
-                              className="p-3 rounded-xl"
-                              style={{
-                                backgroundColor: `${pkg.color}20`,
-                                boxShadow: `0 0 30px ${pkg.color}30`,
-                              }}
-                            >
-                              <Icon
-                                className="h-7 w-7"
-                                style={{ color: pkg.color }}
-                              />
-                            </div>
-                          </div>
-
-                          <div>
-                            <h3 className="text-2xl font-bold text-signal-white mb-2">
-                              {pkg.name}
-                            </h3>
-                            <div
-                              className="text-3xl font-black mb-3"
-                              style={{ color: pkg.color }}
-                            >
-                              {pkg.price}
-                            </div>
-                            <p className="text-circuit-silver text-sm leading-relaxed">
-                              {pkg.description}
-                            </p>
-                          </div>
-
-                          <div className="space-y-3 pt-4 border-t border-synapse-blue/20">
-                            {pkg.features.map((feature, i) => (
-                              <div
-                                key={feature}
-                                className="flex items-start gap-3 text-circuit-silver text-sm"
-                              >
-                                <Check
-                                  className="h-5 w-5 shrink-0 mt-0.5"
-                                  style={{ color: pkg.color }}
-                                />
-                                <span>{feature}</span>
-                              </div>
-                            ))}
-                          </div>
-
-                          <a href="/contact" className="block">
-                            <Button
-                              size="lg"
-                              variant={pkg.popular ? "primary" : "ghost"}
-                              className="w-full"
-                            >
-                              Get Started
-                              <ArrowRight className="ml-2 h-5 w-5" />
-                            </Button>
-                          </a>
-                        </div>
-                      </GlassCard>
-                    </motion.div>
-                  );
-                })}
-              </div>
+                        <Icon
+                          className="h-7 w-7"
+                          style={{ color: category.color }}
+                        />
+                      </div>
+                      <h3 className="text-xl font-bold text-signal-white mb-4">
+                        {category.name}
+                      </h3>
+                      <ul className="space-y-2">
+                        {category.services.map((service) => (
+                          <li
+                            key={service}
+                            className="flex items-start gap-2 text-circuit-silver text-sm"
+                          >
+                            <Check
+                              className="h-4 w-4 shrink-0 mt-0.5"
+                              style={{ color: category.color }}
+                            />
+                            <span>{service}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </GlassCard>
+                  </motion.div>
+                );
+              })}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
 
-        {/* Monthly Services */}
-        {billingPeriod === "monthly" && (
-          <section className="relative w-full py-20 px-6 sm:px-8 lg:px-12">
-            <div className="w-full max-w-[1400px] mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {monthlyPackages.map((pkg, index) => {
-                  const Icon = pkg.icon;
-                  return (
-                    <motion.div
-                      key={pkg.name}
-                      initial={{ opacity: 0, y: 50 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
+        {/* Pricing Factors Section */}
+        <section className="relative w-full py-20 px-6 sm:px-8 lg:px-12">
+          <div className="w-full max-w-[1200px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+                How We <span className="text-synapse-blue">Determine Pricing</span>
+              </h2>
+              <p className="text-base md:text-lg text-circuit-silver max-w-2xl mx-auto">
+                Your quote is based on these key factors to ensure you get the best value
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {pricingFactors.map((factor, index) => {
+                const Icon = factor.icon;
+                return (
+                  <motion.div
+                    key={factor.title}
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <GlassCard
+                      variant="dark"
+                      className="p-6 hover:border-synapse-blue/50 transition-all h-full"
                     >
-                      <GlassCard variant="dark" className="h-full">
-                        <div className="p-8 space-y-6">
-                          <div className="flex items-start justify-between">
-                            <div
-                              className="p-3 rounded-xl"
-                              style={{
-                                backgroundColor: `${pkg.color}20`,
-                                boxShadow: `0 0 30px ${pkg.color}30`,
-                              }}
-                            >
-                              <Icon
-                                className="h-7 w-7"
-                                style={{ color: pkg.color }}
-                              />
-                            </div>
-                          </div>
-
-                          <div>
-                            <h3 className="text-2xl font-bold text-signal-white mb-2">
-                              {pkg.name}
-                            </h3>
-                            <div
-                              className="text-3xl font-black mb-3"
-                              style={{ color: pkg.color }}
-                            >
-                              {pkg.price}
-                            </div>
-                            <p className="text-circuit-silver text-sm leading-relaxed">
-                              {pkg.description}
-                            </p>
-                          </div>
-
-                          <div className="space-y-3 pt-4 border-t border-synapse-blue/20">
-                            {pkg.features.map((feature, i) => (
-                              <div
-                                key={feature}
-                                className="flex items-start gap-3 text-circuit-silver text-sm"
-                              >
-                                <Check
-                                  className="h-5 w-5 shrink-0 mt-0.5"
-                                  style={{ color: pkg.color }}
-                                />
-                                <span>{feature}</span>
-                              </div>
-                            ))}
-                          </div>
-
-                          <a href="/contact" className="block">
-                            <Button
-                              size="lg"
-                              variant="ghost"
-                              className="w-full"
-                            >
-                              Get Started
-                              <ArrowRight className="ml-2 h-5 w-5" />
-                            </Button>
-                          </a>
+                      <div className="flex items-start gap-4">
+                        <div
+                          className="p-3 rounded-lg shrink-0"
+                          style={{
+                            backgroundColor: `${factor.color}20`,
+                          }}
+                        >
+                          <Icon
+                            className="h-6 w-6"
+                            style={{ color: factor.color }}
+                          />
                         </div>
-                      </GlassCard>
-                    </motion.div>
-                  );
-                })}
-              </div>
+                        <div>
+                          <h3 className="text-lg font-bold text-signal-white mb-2">
+                            {factor.title}
+                          </h3>
+                          <p className="text-circuit-silver text-sm">
+                            {factor.description}
+                          </p>
+                        </div>
+                      </div>
+                    </GlassCard>
+                  </motion.div>
+                );
+              })}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
 
-        {/* Payment Info Section */}
+        {/* Our Commitment Section */}
         <section className="relative w-full py-20 px-6 sm:px-8 lg:px-12 bg-synapse-blue/5">
           <div className="w-full max-w-[1200px] mx-auto">
             <motion.div
@@ -400,39 +324,37 @@ export default function PricingPage() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
-                Payment <span className="text-synapse-blue">Information</span>
+                Our <span className="text-synapse-blue">Commitment</span>
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <GlassCard variant="dark" className="p-6 text-center">
-                  <div className="text-4xl mb-4">💳</div>
+                  <div className="text-4xl mb-4">💎</div>
                   <h3 className="text-xl font-bold text-signal-white mb-2">
-                    Website Projects
+                    Fair Pricing
                   </h3>
                   <p className="text-circuit-silver text-sm">
-                    50% deposit to start, 50% when project is complete and live
+                    Competitive rates based on market standards and the value we deliver
                   </p>
                 </GlassCard>
 
                 <GlassCard variant="dark" className="p-6 text-center">
-                  <div className="text-4xl mb-4">📅</div>
+                  <div className="text-4xl mb-4">🔍</div>
                   <h3 className="text-xl font-bold text-signal-white mb-2">
-                    Monthly Services
+                    Transparent Process
                   </h3>
                   <p className="text-circuit-silver text-sm">
-                    Billed monthly. Cancel anytime after minimum commitment
-                    period
+                    Clear breakdown of costs and deliverables before you commit
                   </p>
                 </GlassCard>
 
                 <GlassCard variant="dark" className="p-6 text-center">
-                  <div className="text-4xl mb-4">💰</div>
+                  <div className="text-4xl mb-4">🎯</div>
                   <h3 className="text-xl font-bold text-signal-white mb-2">
-                    Payment Plans
+                    Value-Focused
                   </h3>
                   <p className="text-circuit-silver text-sm">
-                    For projects $5,000+, we offer 3-6 month payment plans with
-                    0% interest
+                    Every dollar you invest is optimized for maximum ROI and results
                   </p>
                 </GlassCard>
               </div>
@@ -451,20 +373,25 @@ export default function PricingPage() {
             >
               <GlassCard variant="dark" className="p-10 md:p-14">
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-                  Not Sure Which Package?
-                  <span className="text-synapse-blue"> Let&apos;s Talk</span>
+                  Ready to Get Your
+                  <span className="text-synapse-blue"> Custom Quote</span>?
                 </h2>
                 <p className="text-lg text-circuit-silver mb-8 max-w-2xl mx-auto">
-                  Free 30-minute consultation. We&apos;ll understand your
-                  business and recommend the best package for your goals and
-                  budget.
+                  Share your project details and requirements. We&apos;ll provide a detailed, customized quote within 24-48 hours.
                 </p>
-                <a href="/contact">
-                  <Button size="lg" variant="primary" className="px-8 py-4">
-                    Schedule Free Call
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </a>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <a href="/contact">
+                    <Button size="lg" variant="primary" className="px-8 py-4">
+                      Request Custom Quote
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </a>
+                  <a href="/projects">
+                    <Button size="lg" variant="ghost" className="px-8 py-4">
+                      View Our Work
+                    </Button>
+                  </a>
+                </div>
               </GlassCard>
             </motion.div>
           </div>
