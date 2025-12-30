@@ -68,7 +68,7 @@ export default function HomeClient() {
         <ParticleBackground className="fixed inset-0 -z-10" />
 
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center w-full px-6 sm:px-8 lg:px-12 pt-32 pb-24">
+        <section className="relative min-h-screen flex items-center w-full px-6 sm:px-8 lg:px-12 pt-32 pb-24 overflow-x-clip">
           {/* Floating Keywords */}
           <FloatingKeywords />
 
@@ -335,7 +335,7 @@ export default function HomeClient() {
         </section>
 
         {/* Why Us Section */}
-        <section className="relative w-full py-20 md:py-24 px-6 sm:px-8 lg:px-12 bg-linear-to-b from-void-black via-synapse-blue/5 to-void-black">
+        <section className="relative w-full py-20 md:py-24 px-6 sm:px-8 lg:px-12 bg-linear-to-b from-void-black via-synapse-blue/5 to-void-black overflow-x-clip">
           <div className="w-full max-w-[1400px] mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center">
               <motion.div
@@ -423,11 +423,13 @@ export default function HomeClient() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: stat.delay }}
                     viewport={{ once: true }}
-                    className="absolute"
+                    className={`absolute ${
+                      i % 2 === 0 
+                        ? "right-0 md:-right-[5%]" 
+                        : "left-0 md:-left-[5%]"
+                    }`}
                     style={{
                       top: `${20 + i * 30}%`,
-                      right: i % 2 === 0 ? "-5%" : "auto",
-                      left: i % 2 !== 0 ? "-5%" : "auto",
                     }}
                   >
                     <GlassCard className="px-4 py-2">

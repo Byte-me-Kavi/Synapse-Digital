@@ -21,6 +21,7 @@ import Button from "@/components/Button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import { TikTokIcon } from "@/components/Icons";
 
 export default function SocialMediaPage() {
   const services = [
@@ -77,7 +78,7 @@ export default function SocialMediaPage() {
   const platforms = [
     {
       name: "TikTok",
-      icon: "🎵",
+      icon: TikTokIcon,
       statsValue: 1,
       statsSuffix: "B+ users",
       color: "#00f2ea",

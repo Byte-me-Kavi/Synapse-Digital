@@ -78,7 +78,9 @@ export const metadata: Metadata = {
     creator: "@synapsedigital",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/logo/logo.png",
+    shortcut: "/logo/logo.png",
+    apple: "/logo/logo.png",
   },
   category: "technology",
   alternates: {
