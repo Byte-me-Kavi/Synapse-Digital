@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Core pages
     const routes = [
         '',
-        '/pricing',
+
         '/projects',
         '/services',
         '/social-media-management', // High priority service

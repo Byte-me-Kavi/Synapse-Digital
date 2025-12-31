@@ -747,7 +747,7 @@ export default function SocialMediaPage() {
                   <span className="text-synapse-blue"> Custom Package</span>?
                 </h2>
                 <p className="text-lg text-circuit-silver mb-8 max-w-2xl mx-auto">
-                  Every business is unique. Tell us what you need, and we&apos;ll create a customized social media package that fits your goals and budget.
+                  Every business is unique. Tell us what you need, and we&apos;ll create a customized social media package that fits your goals.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <a href="/contact">

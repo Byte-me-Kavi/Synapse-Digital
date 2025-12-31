@@ -412,7 +412,7 @@ export default function ServicesClient() {
                     After launching your website, we provide a detailed Navlens
                     report after 1-4 weeks, giving you actionable insights to
                     improve your website&apos;s performance. Redesign services based
-                    on these insights are available as a premium paid service.
+                    on these insights are available as a premium service.
                   </p>
 
                   <div className="grid grid-cols-2 gap-4">

@@ -174,8 +174,8 @@ export default function PrivacyPolicyPage() {
                   </p>
                   <div className="mt-4 space-y-2">
                     <p className="text-synapse-blue">
-                      <a href="mailto:info@synapsedigital.dev" className="hover:underline">
-                        info@synapsedigital.dev
+                      <a href="mailto:synapsedigitalofficial@gmail.com" className="hover:underline">
+                        synapsedigitalofficial@gmail.com
                       </a>
                     </p>
                     <p className="text-circuit-silver">

@@ -13,7 +13,7 @@ export default function JsonLd() {
         "image": "https://synapsedigital.dev/og-image.png",
         "url": "https://synapsedigital.dev",
         "telephone": "+94774671009",
-        "email": "info@synapsedigital.dev",
+        "email": "synapsedigitalofficial@gmail.com",
         "priceRange": "$$$",
         "address": {
           "@type": "PostalAddress",

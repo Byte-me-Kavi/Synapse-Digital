@@ -26,7 +26,7 @@ export default function Navbar() {
     { name: "Web Solutions", href: "/services" },
     { name: "Social Media Management", href: "/social-media-management" },
     { name: "Projects", href: "/projects" },
-    { name: "Pricing", href: "/pricing" },
+
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];

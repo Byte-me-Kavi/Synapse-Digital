@@ -31,7 +31,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       label: "Social Media Management",
       icon: Share2,
     },
-    { href: "/pricing", label: "Pricing", icon: DollarSign },
+
     { href: "/about", label: "About", icon: Users },
     { href: "/contact", label: "Contact", icon: Mail },
   ];

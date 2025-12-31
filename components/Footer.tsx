@@ -11,7 +11,7 @@ export default function Footer() {
       { name: "Web Solutions", href: "/services" },
       { name: "NavLens Analytics", href: "/services#navlens" },
       { name: "Social Media", href: "/social-media-management" },
-      { name: "Pricing", href: "/pricing" },
+
     ],
     company: [
       { name: "About Us", href: "/#about" },
@@ -85,10 +85,10 @@ export default function Footer() {
                 viewport={{ once: true }}
               >
                 <a
-                  href="mailto:info@synapsedigital.dev"
+                  href="mailto:synapsedigitalofficial@gmail.com"
                   className="text-circuit-silver hover:text-synapse-blue transition-colors duration-300 text-sm"
                 >
-                  info@synapsedigital.dev
+                  synapsedigitalofficial@gmail.com
                 </a>
               </motion.li>
               <motion.li

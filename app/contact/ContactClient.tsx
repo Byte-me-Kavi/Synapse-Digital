@@ -10,6 +10,15 @@ import {
   MessageSquare,
   User,
   Building,
+  Code,
+  Share2,
+  TrendingUp,
+  BarChart2,
+  ShoppingBag,
+  Cpu,
+  HelpCircle,
+  ChevronDown,
+  Check,
 } from "lucide-react";
 import { useState } from "react";
 import dynamic from "next/dynamic";
@@ -40,15 +49,45 @@ export default function ContactClient() {
     "idle" | "success" | "error"
   >("idle");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Invalid email format";
+    }
+    if (!formData.service) newErrors.service = "Please select a service";
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    } else if (formData.message.trim().length < 5) {
+      newErrors.message = "Message must be at least 5 characters";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus("idle");
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    if (!validateForm()) {
+      setIsSubmitting(false);
+      return;
+    }
 
-    setIsSubmitting(false);
+    // Optimistically show success immediately
     setSubmitStatus("success");
+    setIsSubmitting(false);
+    
+    // Store data to send
+    const dataToSend = { ...formData };
+
+    // Reset form immediately
     setFormData({
       name: "",
       email: "",
@@ -56,6 +95,18 @@ export default function ContactClient() {
       phone: "",
       service: "",
       message: "",
+    });
+
+    // Send email in background
+    fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSend),
+    }).catch((error) => {
+      console.error("Error submitting form in background:", error);
+      // Optionally handle silent failure logging here
     });
 
     setTimeout(() => setSubmitStatus("idle"), 5000);
@@ -76,8 +127,8 @@ export default function ContactClient() {
     {
       icon: Mail,
       title: "Email Us",
-      content: "info@synapsedigital.dev",
-      link: "mailto:info@synapsedigital.dev",
+      content: "synapsedigitalofficial@gmail.com",
+      link: "mailto:synapsedigitalofficial@gmail.com",
       color: "#00C2FF",
     },
     {
@@ -103,13 +154,13 @@ export default function ContactClient() {
   ];
 
   const services = [
-    "Web Development",
-    "Social Media Marketing",
-    "SEO & Growth",
-    "NavLens Analytics",
-    "E-commerce Solutions",
-    "Custom Software",
-    "Other",
+    { name: "Web Development", icon: Code },
+    { name: "Social Media Marketing", icon: Share2 },
+    { name: "SEO & Growth", icon: TrendingUp },
+    { name: "NavLens Analytics", icon: BarChart2 },
+    { name: "E-commerce Solutions", icon: ShoppingBag },
+    { name: "Custom Software", icon: Cpu },
+    { name: "Other", icon: HelpCircle },
   ];
 
   return (
@@ -132,11 +183,11 @@ export default function ContactClient() {
                 <span className="text-synapse-blue">Business</span>
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl text-circuit-silver max-w-3xl mx-auto mb-6">
-                Free consultation - we&apos;ll show you exactly how we can help
+                Custom Growth Strategy - we&apos;ll show you exactly how we can help
                 grow your business.
               </p>
               <div className="text-base text-synapse-blue font-semibold">
-                We reply within 2 business hours | Best fair custom pricing based on your needs
+                We reply within 2 business hours | Custom solutions based on your needs
               </div>
             </motion.div>
           </div>
@@ -212,12 +263,12 @@ export default function ContactClient() {
                   What You Get:
                   <span className="text-synapse-blue">
                     {" "}
-                    Free Strategy Call ($500 Value)
+                    Custom Growth Strategy
                   </span>
                 </h2>
                 <p className="text-lg text-circuit-silver leading-relaxed">
                   Fill out the form and we&apos;ll show you exactly what we can
-                  do for your business. Get a custom plan + pricing quote in 24
+                  do for your business. Get a custom plan in 24
                   hours.
                 </p>
                 <div className="space-y-4">
@@ -241,11 +292,11 @@ export default function ContactClient() {
                     </div>
                     <div>
                       <h3 className="text-signal-white font-semibold mb-1">
-                        Free 30-Minute Strategy Call
+                        In-Depth Business Analysis
                       </h3>
                       <p className="text-circuit-silver text-sm">
-                        We&apos;ll analyze your business and show you how to get
-                        more customers online
+                        We&apos;ll analyze your business to uncover hidden growth
+                        opportunities
                       </p>
                     </div>
                   </div>
@@ -258,8 +309,7 @@ export default function ContactClient() {
                         Payment Plans Available
                       </h3>
                       <p className="text-circuit-silver text-sm">
-                        20% deposit to start, 80% on completion. Monthly payment
-                        plans for larger projects
+                        Tailored to your project requirements.
                       </p>
                     </div>
                   </div>
@@ -292,6 +342,9 @@ export default function ContactClient() {
                           className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-signal-white placeholder-circuit-silver focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all"
                           placeholder="Sarah Johnson"
                         />
+                        {errors.name && (
+                          <p className="text-red-400 text-xs mt-1 ml-1">{errors.name}</p>
+                        )}
                       </div>
                       <div>
                         <label
@@ -310,6 +363,9 @@ export default function ContactClient() {
                           className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-signal-white placeholder-circuit-silver focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all"
                           placeholder="sarah@company.com"
                         />
+                        {errors.email && (
+                          <p className="text-red-400 text-xs mt-1 ml-1">{errors.email}</p>
+                        )}
                       </div>
                     </div>
 
@@ -351,27 +407,96 @@ export default function ContactClient() {
                     </div>
 
                     <div>
-                      <label
-                        htmlFor="service"
-                        className="block text-sm font-medium text-signal-white mb-2"
-                      >
-                        Service Interested In *
-                      </label>
-                      <select
-                        id="service"
-                        name="service"
-                        required
-                        value={formData.service}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-signal-white focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all"
-                      >
-                        <option value="">Select a service</option>
-                        {services.map((service) => (
-                          <option key={service} value={service}>
-                            {service}
-                          </option>
-                        ))}
-                      </select>
+                        <label
+                          htmlFor="service"
+                          className="block text-sm font-medium text-signal-white mb-2"
+                        >
+                          Service Interested In *
+                        </label>
+                        <div className="relative">
+                          <button
+                            type="button"
+                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                            className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-left flex items-center justify-between text-signal-white focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all hover:border-synapse-blue/50"
+                          >
+                            <span className="flex items-center gap-2">
+                              {formData.service ? (
+                                <>
+                                  {(() => {
+                                    const selectedService = services.find(s => s.name === formData.service);
+                                    const Icon = selectedService?.icon || HelpCircle;
+                                    return <Icon className="w-4 h-4 text-synapse-blue" />;
+                                  })()}
+                                  {formData.service}
+                                </>
+                              ) : (
+                                <span className="text-circuit-silver">Select a service</span>
+                              )}
+                            </span>
+                            <ChevronDown
+                              className={`w-4 h-4 text-circuit-silver transition-transform ${
+                                isDropdownOpen ? "rotate-180" : ""
+                              }`}
+                            />
+                          </button>
+
+                          {isDropdownOpen && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: 10 }}
+                              className="absolute z-50 w-full mt-2 bg-[#0a0a0a] border border-synapse-blue/30 rounded-lg shadow-xl overflow-hidden backdrop-blur-xl"
+                            >
+                              {services.map((service) => {
+                                const Icon = service.icon;
+                                const isSelected = formData.service === service.name;
+                                return (
+                                  <button
+                                    key={service.name}
+                                    type="button"
+                                    onClick={() => {
+                                      setFormData({ ...formData, service: service.name });
+                                      setErrors({ ...errors, service: "" });
+                                      setIsDropdownOpen(false);
+                                    }}
+                                    className={`w-full px-4 py-3 flex items-center justify-between hover:bg-synapse-blue/10 transition-colors ${
+                                      isSelected ? "bg-synapse-blue/20" : ""
+                                    }`}
+                                  >
+                                    <div className="flex items-center gap-3">
+                                      <div
+                                        className={`p-2 rounded-lg ${
+                                          isSelected
+                                            ? "bg-synapse-blue/20 text-synapse-blue"
+                                            : "bg-void-black/50 text-circuit-silver"
+                                        }`}
+                                      >
+                                        <Icon className="w-4 h-4" />
+                                      </div>
+                                      <span
+                                        className={`text-sm ${
+                                          isSelected
+                                            ? "text-signal-white font-medium"
+                                            : "text-circuit-silver"
+                                        }`}
+                                      >
+                                        {service.name}
+                                      </span>
+                                    </div>
+                                    {isSelected && (
+                                      <Check className="w-4 h-4 text-synapse-blue" />
+                                    )}
+                                  </button>
+                                );
+                              })}
+                            </motion.div>
+                          )}
+                        </div>
+                        {errors.service && (
+                          <p className="text-red-400 text-xs mt-1 ml-1">
+                            {errors.service}
+                          </p>
+                        )}
                     </div>
 
                     <div>
@@ -391,6 +516,9 @@ export default function ContactClient() {
                         className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-signal-white placeholder-circuit-silver focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all resize-none"
                         placeholder="Tell us about your project..."
                       />
+                      {errors.message && (
+                        <p className="text-red-400 text-xs mt-1 ml-1">{errors.message}</p>
+                      )}
                     </div>
 
                     {submitStatus === "success" && (
@@ -401,6 +529,16 @@ export default function ContactClient() {
                       >
                         ✓ Message sent successfully! We&apos;ll get back to you
                         soon.
+                      </motion.div>
+                    )}
+
+                    {submitStatus === "error" && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm"
+                      >
+                        ⚠ Something went wrong. Please try again or email us directly.
                       </motion.div>
                     )}
 
