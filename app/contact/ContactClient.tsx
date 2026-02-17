@@ -19,6 +19,11 @@ import {
   HelpCircle,
   ChevronDown,
   Check,
+  Search,
+  Palette,
+  Hammer,
+  Rocket,
+  Settings,
 } from "lucide-react";
 import { useState } from "react";
 import dynamic from "next/dynamic";
@@ -106,7 +111,6 @@ export default function ContactClient() {
       body: JSON.stringify(dataToSend),
     }).catch((error) => {
       console.error("Error submitting form in background:", error);
-      // Optionally handle silent failure logging here
     });
 
     setTimeout(() => setSubmitStatus("idle"), 5000);
@@ -557,6 +561,207 @@ export default function ContactClient() {
                   </form>
                 </GlassCard>
               </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* How We Work - Process Timeline */}
+        <section className="relative w-full py-20 px-6 sm:px-8 lg:px-12">
+          <div className="w-full max-w-[1000px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+                How We <span className="text-synapse-blue">Work</span>
+              </h2>
+              <p className="text-base md:text-lg text-circuit-silver max-w-2xl mx-auto">
+                From initial discovery to ongoing optimization — here&apos;s our
+                proven process
+              </p>
+            </motion.div>
+
+            <div className="relative">
+              {/* Vertical line (background - dim) */}
+              <div
+                className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] md:-translate-x-[1px]"
+                style={{ backgroundColor: "rgba(0,194,255,0.1)" }}
+              />
+
+              {[
+                {
+                  icon: Search,
+                  title: "Discovery",
+                  description:
+                    "We analyze your business, competitors, and target audience to build a custom strategy that gets results.",
+                  color: "#00C2FF",
+                  duration: "Week 1",
+                },
+                {
+                  icon: Palette,
+                  title: "Design",
+                  description:
+                    "We create stunning visual designs and prototypes. You review and approve before we write a single line of code.",
+                  color: "#00FF88",
+                  duration: "Week 2",
+                },
+                {
+                  icon: Hammer,
+                  title: "Build",
+                  description:
+                    "Our developers bring the designs to life with clean, fast, mobile-optimized code. Weekly progress updates included.",
+                  color: "#FFB224",
+                  duration: "Week 3-4",
+                },
+                {
+                  icon: Rocket,
+                  title: "Launch",
+                  description:
+                    "We test everything, set up analytics with NavLens, and launch your project. You get full training on managing your site.",
+                  color: "#FF0080",
+                  duration: "Week 5",
+                },
+                {
+                  icon: Settings,
+                  title: "Optimize",
+                  description:
+                    "We monitor performance, analyze user behavior, and continuously optimize to maximize your conversions and ROI.",
+                  color: "#A855F7",
+                  duration: "Ongoing",
+                },
+              ].map((step, index) => {
+                const StepIcon = step.icon;
+                const isEven = index % 2 === 0;
+                return (
+                  <motion.div
+                    key={step.title}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    className={`relative flex items-start mb-12 last:mb-0 ${
+                      isEven
+                        ? "md:flex-row"
+                        : "md:flex-row-reverse"
+                    }`}
+                  >
+                    {/* Content card */}
+                    <div
+                      className={`ml-16 md:ml-0 md:w-[calc(50%-40px)] ${
+                        isEven ? "md:pr-4 md:text-right" : "md:pl-4 md:text-left"
+                      }`}
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.02, y: -4 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <GlassCard
+                          variant="dark"
+                          className="p-6 hover:border-synapse-blue/50 transition-all"
+                        >
+                          <div
+                            className={`flex items-center gap-3 mb-3 ${
+                              isEven ? "md:justify-end" : "md:justify-start"
+                            }`}
+                          >
+                            <span
+                              className="px-2 py-0.5 text-xs font-bold rounded-full"
+                              style={{
+                                backgroundColor: `${step.color}20`,
+                                color: step.color,
+                                border: `1px solid ${step.color}40`,
+                              }}
+                            >
+                              {step.duration}
+                            </span>
+                          </div>
+                          <h3 className="text-xl font-bold text-signal-white mb-2">
+                            {step.title}
+                          </h3>
+                          <p className="text-circuit-silver text-sm leading-relaxed">
+                            {step.description}
+                          </p>
+                        </GlassCard>
+                      </motion.div>
+                    </div>
+
+                    {/* Center node */}
+                    <div className="absolute left-0 md:left-1/2 md:-translate-x-1/2 z-10">
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        transition={{
+                          duration: 0.4,
+                          delay: index * 0.1 + 0.2,
+                          type: "spring",
+                          stiffness: 200,
+                        }}
+                        viewport={{ once: true }}
+                        className="relative"
+                      >
+                        {/* Glow ring */}
+                        <motion.div
+                          className="absolute inset-0 rounded-full"
+                          style={{
+                            backgroundColor: `${step.color}20`,
+                            boxShadow: `0 0 20px ${step.color}40`,
+                          }}
+                          animate={{
+                            boxShadow: [
+                              `0 0 10px ${step.color}20`,
+                              `0 0 25px ${step.color}50`,
+                              `0 0 10px ${step.color}20`,
+                            ],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            delay: index * 0.3,
+                          }}
+                        />
+                        {/* Icon */}
+                        <div
+                          className="relative w-12 h-12 rounded-full flex items-center justify-center border-2"
+                          style={{
+                            backgroundColor: "#050505",
+                            borderColor: step.color,
+                            boxShadow: `0 0 15px ${step.color}30`,
+                          }}
+                        >
+                          <StepIcon
+                            className="h-5 w-5"
+                            style={{ color: step.color }}
+                          />
+                        </div>
+                      </motion.div>
+
+                      {/* Energizing line segment */}
+                      {index < 4 && (
+                        <motion.div
+                          className="absolute left-1/2 -translate-x-1/2 top-12 w-[2px]"
+                          style={{
+                            height: "calc(3rem + 48px)",
+                            background: `linear-gradient(to bottom, ${step.color}, transparent)`,
+                          }}
+                          initial={{ scaleY: 0 }}
+                          whileInView={{ scaleY: 1 }}
+                          transition={{
+                            duration: 0.6,
+                            delay: index * 0.1 + 0.4,
+                          }}
+                          viewport={{ once: true }}
+                        />
+                      )}
+                    </div>
+
+                    {/* Spacer for opposite side on desktop */}
+                    <div className="hidden md:block md:w-[calc(50%-40px)]" />
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>

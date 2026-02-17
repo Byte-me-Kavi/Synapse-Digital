@@ -25,6 +25,10 @@ import { AnimatedCircuit } from "@/components/AnimatedSVG";
 import MagneticButton from "@/components/MagneticButton";
 import { TextRevealWords } from "@/components/TextReveal";
 import FloatingKeywords from "@/components/FloatingKeywords";
+import ClientMarquee from "@/components/ClientMarquee";
+import TechStackGrid from "@/components/TechStackGrid";
+import ResultsStats from "@/components/ResultsStats";
+import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 
 export default function HomeClient() {
   const [activeService, setActiveService] = useState<number | null>(null);
@@ -34,28 +38,28 @@ export default function HomeClient() {
       icon: Code,
       title: "Website Development",
       description:
-        "Fast, mobile-friendly websites that turn visitors into customers. 4-6 week delivery. Starting at $2,999.",
+        "Fast, mobile-friendly websites that turn visitors into customers. 4-6 week delivery.",
       color: "#00C2FF",
     },
     {
       icon: Eye,
       title: "NavLens Analytics",
       description:
-        "See exactly how visitors use your site with heatmaps and recordings. Know what works, fix what doesn't. $99/month.",
+        "See exactly how visitors use your site with heatmaps and recordings. Know what works, fix what doesn't.",
       color: "#00C2FF",
     },
     {
       icon: Share2,
       title: "Social Media Management",
       description:
-        "We create and post content that gets engagement. Grow your followers and sell more. From $999/month.",
+        "We create and post content that gets engagement. Grow your followers and sell more.",
       color: "#FF0080",
     },
     {
       icon: TrendingUp,
       title: "SEO & Traffic Growth",
       description:
-        "Rank #1 on Google for keywords your customers search. More traffic = more sales. From $799/month.",
+        "Rank #1 on Google for keywords your customers search. More traffic = more sales.",
       color: "#00FF88",
     },
   ];
@@ -183,10 +187,12 @@ export default function HomeClient() {
               >
                 <div className="relative px-4">
                   <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight">
-                    <span className="text-signal-white block mb-3">
+                    <span className="block mb-3 bg-gradient-to-r from-signal-white via-circuit-silver to-signal-white bg-[length:200%_auto] animate-[gradient-shift_4s_ease-in-out_infinite] bg-clip-text text-transparent">
                       SYNAPSE
                     </span>
-                    <span className="text-synapse-blue block">DIGITAL</span>
+                    <span className="block bg-gradient-to-r from-synapse-blue via-[#A855F7] via-50% to-synapse-blue bg-[length:200%_auto] animate-[gradient-shift_3s_ease-in-out_infinite] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,194,255,0.4)]">
+                      DIGITAL
+                    </span>
                   </h1>
                   <div className="absolute -bottom-4 left-0 right-0 h-1 bg-linear-to-r from-transparent via-synapse-blue to-transparent"></div>
                 </div>
@@ -202,7 +208,7 @@ export default function HomeClient() {
                 <Typewriter
                   text={[
                     "We Build Websites, Run Your Social Media & Drive Traffic Through SEO",
-                    "Get More Customers Online - Fast Results in 30-90 Days",
+                    "Get More Customers Online - Fast Results",
                     "Professional Web Design + Marketing That Actually Works",
                   ]}
                   delay={500}
@@ -235,9 +241,14 @@ export default function HomeClient() {
                   </a>
                 </MagneticButton>
               </motion.div>
+
+
             </motion.div>
           </div>
         </section>
+
+        {/* Client Marquee */}
+        <ClientMarquee />
 
         {/* Services Section */}
         <section className="relative w-full px-6 sm:px-8 bg-linear-to-b from-void-black via-data-dark-blue/10 to-void-black">
@@ -253,7 +264,7 @@ export default function HomeClient() {
                 What <span className="text-synapse-blue">We Do</span>
               </h2>
               <p className="text-base md:text-lg lg:text-xl text-circuit-silver max-w-3xl mx-auto">
-                Everything you need to grow your business online - from $2,999
+                Everything you need to grow your business online
               </p>
             </motion.div>
 
@@ -333,6 +344,9 @@ export default function HomeClient() {
             </div>
           </div>
         </section>
+
+        {/* Tech Stack Grid */}
+        <TechStackGrid />
 
         {/* Why Us Section */}
         <section className="relative w-full py-20 md:py-24 px-6 sm:px-8 lg:px-12 bg-linear-to-b from-void-black via-synapse-blue/5 to-void-black overflow-x-clip">
@@ -447,69 +461,11 @@ export default function HomeClient() {
           </div>
         </section>
 
-        {/* Animated Counter Stats Section */}
-        <section className="relative w-full py-16 md:py-20 px-6 sm:px-8 lg:px-12 bg-synapse-blue/5">
-          <div className="w-full max-w-[1400px] mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <TextRevealWords
-                text="Real Results for Real Businesses"
-                className="text-3xl sm:text-4xl md:text-5xl font-bold"
-              />
-            </motion.div>
+        {/* Results Stats - Scroll-Triggered */}
+        <ResultsStats />
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <AnimatedCounter
-                  end={500}
-                  suffix="+"
-                  className="text-4xl md:text-6xl font-bold text-synapse-blue mb-2"
-                />
-                <p className="text-circuit-silver text-sm md:text-base">
-                  Projects Delivered
-                </p>
-              </div>
-              <div className="text-center">
-                <AnimatedCounter
-                  end={98}
-                  suffix="%"
-                  delay={0.2}
-                  className="text-4xl md:text-6xl font-bold text-synapse-blue mb-2"
-                />
-                <p className="text-circuit-silver text-sm md:text-base">
-                  Client Satisfaction
-                </p>
-              </div>
-              <div className="text-center">
-                <AnimatedCounter
-                  end={15}
-                  suffix="M+"
-                  delay={0.4}
-                  className="text-4xl md:text-6xl font-bold text-synapse-blue mb-2"
-                />
-                <p className="text-circuit-silver text-sm md:text-base">
-                  Users Reached
-                </p>
-              </div>
-              <div className="text-center">
-                <AnimatedCounter
-                  end={24}
-                  suffix="/7"
-                  delay={0.6}
-                  className="text-4xl md:text-6xl font-bold text-synapse-blue mb-2"
-                />
-                <p className="text-circuit-silver text-sm md:text-base">
-                  Support Available
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Before/After Slider */}
+        <BeforeAfterSlider />
 
         {/* CTA Section */}
         <section className="relative w-full py-20 md:py-24 px-6 sm:px-8 lg:px-12">

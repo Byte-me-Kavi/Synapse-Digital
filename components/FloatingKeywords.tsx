@@ -2,51 +2,66 @@
 
 import { motion } from "framer-motion";
 
-// Pre-generated random values to avoid Math.random() in render
 const KEYWORD_DATA = [
-  { text: "Web Development", x: 22.5, y: 44.1, duration: 18.3, delay: 0.8 },
-  { text: "Social Media", x: 77.6, y: 15.9, duration: 21.7, delay: 2.1 },
-  { text: "SEO", x: 54.5, y: 88.5, duration: 19.5, delay: 1.3 },
-  { text: "Analytics", x: 35.8, y: 75.7, duration: 23.2, delay: 0.5 },
-  { text: "Content Creation", x: 16.3, y: 41.2, duration: 17.8, delay: 2.7 },
-  { text: "Digital Marketing", x: 52.8, y: 37.0, duration: 20.4, delay: 1.6 },
-  { text: "Branding", x: 42.0, y: 88.9, duration: 22.1, delay: 0.2 },
-  { text: "Web Design", x: 73.2, y: 40.5, duration: 19.9, delay: 2.3 },
+  { text: "Web Development", x: 6, y: 15, rotation: -8 },
+  { text: "Social Media", x: 80, y: 10, rotation: 5 },
+  { text: "SEO", x: 90, y: 75, rotation: -3 },
+  { text: "Analytics", x: 4, y: 80, rotation: 6 },
+  { text: "Content Creation", x: 10, y: 50, rotation: -4 },
+  { text: "Digital Marketing", x: 76, y: 52, rotation: 7 },
+  { text: "Branding", x: 84, y: 30, rotation: -6 },
+  { text: "Web Design", x: 5, y: 35, rotation: 4 },
 ];
 
 export default function FloatingKeywords() {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-60 z-50">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       {KEYWORD_DATA.map((keyword, index) => (
         <motion.div
           key={index}
-          initial={{
-            x: `${keyword.x}vw`,
-            y: `${keyword.y}vh`,
-            opacity: 0,
+          className="absolute"
+          style={{
+            left: `${keyword.x}%`,
+            top: `${keyword.y}%`,
           }}
+          initial={{ opacity: 0, scale: 0, filter: "blur(10px)" }}
           animate={{
-            x: [
-              `${keyword.x}vw`,
-              `${(keyword.x + 20) % 100}vw`,
-              `${keyword.x}vw`,
+            opacity: [0, 0.9, 0.5, 0.9, 0],
+            scale: [0.6, 1, 0.95, 1, 0.6],
+            filter: [
+              "blur(8px)",
+              "blur(0px)",
+              "blur(1px)",
+              "blur(0px)",
+              "blur(8px)",
             ],
-            y: [
-              `${keyword.y}vh`,
-              `${(keyword.y + 15) % 100}vh`,
-              `${keyword.y}vh`,
-            ],
-            opacity: [0, 0.8, 0.6, 0.8, 0],
+            x: [0, 15, -10, 20, 0],
+            y: [0, -10, 5, -15, 0],
+            rotate: [0, keyword.rotation, 0, -keyword.rotation, 0],
           }}
           transition={{
-            duration: keyword.duration,
-            delay: keyword.delay,
+            duration: 10 + index * 1.5,
+            delay: index * 0.6,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute text-white text-base md:text-lg font-semibold whitespace-nowrap"
         >
-          {keyword.text}
+          {/* Glow layer */}
+          <div
+            className="absolute inset-0 text-sm md:text-lg font-bold uppercase tracking-[0.2em] whitespace-nowrap"
+            style={{
+              color: "transparent",
+              textShadow: "0 0 20px rgba(0,194,255,0.6), 0 0 40px rgba(0,194,255,0.3)",
+            }}
+          >
+            {keyword.text}
+          </div>
+          {/* Text layer */}
+          <div
+            className="relative text-sm md:text-lg font-bold uppercase tracking-[0.2em] whitespace-nowrap bg-gradient-to-r from-synapse-blue via-[#A855F7] to-synapse-blue bg-clip-text text-transparent bg-[length:200%_auto] animate-[gradient-shift_3s_ease-in-out_infinite]"
+          >
+            {keyword.text}
+          </div>
         </motion.div>
       ))}
     </div>

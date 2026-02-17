@@ -84,9 +84,9 @@ export function AnimatedCircuit({ className = "" }: { className?: string }) {
           cy={node.cy}
           r="4"
           fill="#00C2FF"
-          initial={{ scale: 0, opacity: 0 }}
+          initial={{ opacity: 0, r: 0 }}
           animate={
-            isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }
+            isInView ? { opacity: 1, r: 4 } : { opacity: 0, r: 0 }
           }
           transition={{
             duration: 0.3,
@@ -102,12 +102,11 @@ export function AnimatedCircuit({ className = "" }: { className?: string }) {
           <motion.circle
             cx="200"
             cy="150"
-            r="15"
             fill="none"
             stroke="#00C2FF"
             strokeWidth="2"
-            initial={{ scale: 0, opacity: 1 }}
-            animate={{ scale: 2, opacity: 0 }}
+            initial={{ r: 0, opacity: 1 }}
+            animate={{ r: 30, opacity: 0 }}
             transition={{
               duration: 2,
               repeat: Infinity,

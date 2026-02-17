@@ -43,9 +43,9 @@ export default function AboutClient() {
   ];
 
   const stats = [
-    { value: 500, suffix: "+", label: "Projects Completed" },
+    { value: 30, suffix: "+", label: "Projects Completed" },
     { value: 98, suffix: "%", label: "Client Satisfaction" },
-    { value: 15, suffix: "M+", label: "Users Reached" },
+    { value: 2, suffix: "K+", label: "Users Reached" },
     { value: 7, suffix: "+", label: "Years Experience" },
   ];
 

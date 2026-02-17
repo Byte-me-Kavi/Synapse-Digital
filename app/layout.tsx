@@ -4,6 +4,8 @@ import "./globals.css";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import ClientWrappers from "@/components/ClientWrappers";
 import JsonLd from "@/components/JsonLd";
+import SplashScreen from "@/components/SplashScreen";
+import SynapseBotWrapper from "@/components/SynapseBotWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -108,7 +110,10 @@ export default function RootLayout({
         <AnimatedBackground />
         <ClientWrappers />
         <JsonLd />
-        <div className="relative z-10 w-full">{children}</div>
+        <div className="relative z-10 w-full">
+          <SplashScreen>{children}</SplashScreen>
+        </div>
+        <SynapseBotWrapper />
 
         {/* <script 
           async 

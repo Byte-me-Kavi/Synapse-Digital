@@ -37,7 +37,7 @@ export default function SocialMediaPage() {
         "Hashtag research",
         "Monthly performance report",
       ],
-      price: "$999/month",
+
       color: "#00C2FF",
     },
     {
@@ -53,7 +53,7 @@ export default function SocialMediaPage() {
         "Bi-weekly strategy calls",
         "Competitor analysis",
       ],
-      price: "$1,999/month",
+
       color: "#00FF88",
     },
     {
@@ -70,7 +70,7 @@ export default function SocialMediaPage() {
         "Weekly strategy & reporting",
         "Guaranteed growth: 1000+ followers in 90 days",
       ],
-      price: "$3,999/month",
+
       color: "#FF0080",
     },
   ];
@@ -161,7 +161,7 @@ export default function SocialMediaPage() {
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl text-circuit-silver max-w-3xl mx-auto mb-10">
                 We create content, post daily, and grow your followers. You
-                focus on running your business. From $999/month.
+                focus on running your business.
               </p>
 
               {/* Platform Stats */}
@@ -248,11 +248,7 @@ export default function SocialMediaPage() {
                               style={{ color: service.color }}
                             />
                           </div>
-                          <div className="text-right">
-                            <div className="text-xl font-bold text-synapse-blue">
-                              {service.price}
-                            </div>
-                          </div>
+
                         </div>
                         <h3 className="text-xl font-bold text-signal-white">
                           {service.title}

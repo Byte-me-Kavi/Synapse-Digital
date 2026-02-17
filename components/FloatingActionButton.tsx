@@ -56,7 +56,7 @@ export default function FloatingActionButton({
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={handleClick}
-          className={`fixed ${positionClasses[position]} z-50 w-14 h-14 rounded-full bg-synapse-blue hover:bg-synapse-blue/90 text-void-black shadow-lg hover:shadow-synapse-blue/50 transition-shadow duration-300 flex items-center justify-center group`}
+          className={`fixed ${positionClasses[position]} z-50 w-14 h-14 rounded-full bg-synapse-blue hover:bg-synapse-blue/90 text-void-black shadow-lg hover:shadow-synapse-blue/50 transition-shadow duration-300 hidden md:flex items-center justify-center group`}
           aria-label="Back to top"
         >
           <motion.div
