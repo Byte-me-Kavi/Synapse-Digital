@@ -10,7 +10,6 @@ import {
   Package,
   Share2,
   Mail,
-  DollarSign,
   Users,
 } from "lucide-react";
 

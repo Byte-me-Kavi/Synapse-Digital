@@ -1,7 +1,24 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
+
+const ScanLine = () => (
+  <motion.div
+    className="absolute left-0 right-0 h-[2px] pointer-events-none z-30"
+    style={{
+      background:
+        "linear-gradient(90deg, transparent, rgba(0,194,255,0.6), transparent)",
+    }}
+    initial={{ top: "0%" }}
+    animate={{ top: "100%" }}
+    transition={{
+      duration: 1.5,
+      ease: "linear",
+      repeat: 1,
+    }}
+  />
+);
 
 export default function SplashScreen({
   children,
@@ -57,22 +74,7 @@ export default function SplashScreen({
     },
   };
 
-  const ScanLine = useCallback(() => (
-    <motion.div
-      className="absolute left-0 right-0 h-[2px] pointer-events-none z-30"
-      style={{
-        background:
-          "linear-gradient(90deg, transparent, rgba(0,194,255,0.6), transparent)",
-      }}
-      initial={{ top: "0%" }}
-      animate={{ top: "100%" }}
-      transition={{
-        duration: 1.5,
-        ease: "linear",
-        repeat: 1,
-      }}
-    />
-  ), []);
+
 
   return (
     <>

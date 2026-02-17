@@ -19,11 +19,11 @@ import Button from "@/components/Button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Typewriter from "@/components/Typewriter";
-import AnimatedCounter from "@/components/AnimatedCounter";
+
 import TiltCard from "@/components/TiltCard";
 import { AnimatedCircuit } from "@/components/AnimatedSVG";
 import MagneticButton from "@/components/MagneticButton";
-import { TextRevealWords } from "@/components/TextReveal";
+
 import FloatingKeywords from "@/components/FloatingKeywords";
 import ClientMarquee from "@/components/ClientMarquee";
 import TechStackGrid from "@/components/TechStackGrid";
