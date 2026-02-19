@@ -22,7 +22,7 @@ export default function ParticleBackground({
     });
   }, []);
 
-  if (!init) {
+  if (!init || isMobile) {
     return null;
   }
 

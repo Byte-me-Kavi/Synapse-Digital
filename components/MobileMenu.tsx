@@ -45,7 +45,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="md:hidden fixed inset-0 bg-void-black/90 backdrop-blur-sm z-100"
+            className="md:hidden fixed inset-0 bg-void-black/90 z-100"
           />
 
           {/* Menu Panel */}
@@ -54,7 +54,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="md:hidden fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-void-black/98 backdrop-blur-xl border-l border-synapse-blue/30 z-101 overflow-y-auto"
+            className="md:hidden fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-void-black border-l border-synapse-blue/30 z-101 overflow-y-auto"
           >
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-synapse-blue/20">

@@ -114,10 +114,12 @@ export default function AnimatedBackground({ className }: { className?: string }
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Mobile-optimized counts
-    const particleCount = isMobile ? 60 : 150;
-    const gridLineCount = isMobile ? 15 : 30;
-    const connectionDistance = isMobile ? 80 : 150;
+    // Mobile-optimized counts - Aggressive
+    const particleCount = isMobile ? 15 : 150;
+    const gridLineCount = isMobile ? 8 : 30;
+    // No connections on mobile to save O(n^2) loop
+    const enableConnections = !isMobile;
+    const connectionDistance = 150;
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -170,26 +172,28 @@ export default function AnimatedBackground({ className }: { className?: string }
         particle.draw(ctx, currentScroll);
       });
 
-      // Connection lines with mobile-friendly distance threshold
-      const scrollColor = Math.sin(currentScroll * 0.001);
-      const r = Math.floor(0 + scrollColor * 50);
-      const g = Math.floor(194 + scrollColor * 61);
-      const b = 255;
+      // Connection lines - Desktop only
+      if (enableConnections) {
+        const scrollColor = Math.sin(currentScroll * 0.001);
+        const r = Math.floor(0 + scrollColor * 50);
+        const g = Math.floor(194 + scrollColor * 61);
+        const b = 255;
 
-      ctx.lineWidth = 0.5;
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+        ctx.lineWidth = 0.5;
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < connectionDistance) {
-            const opacity = (1 - distance / connectionDistance) * 0.15;
-            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${opacity})`;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
+            if (distance < connectionDistance) {
+              const opacity = (1 - distance / connectionDistance) * 0.15;
+              ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
           }
         }
       }
