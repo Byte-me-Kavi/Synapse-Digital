@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 interface MagneticButtonProps {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ export default function MagneticButton({
   onClick,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -26,7 +28,7 @@ export default function MagneticButton({
   const springY = useSpring(y, springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
+    if (!ref.current || isMobile) return;
 
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;

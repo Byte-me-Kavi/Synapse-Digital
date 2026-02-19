@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { TrendingUp, Users, Zap, Target } from "lucide-react";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 interface StatBarProps {
   icon: React.ElementType;
@@ -18,6 +19,7 @@ function StatBar({ icon: Icon, label, before, after, percentage, color, delay }:
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [count, setCount] = useState(0);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!isInView) return;
@@ -84,7 +86,7 @@ function StatBar({ icon: Icon, label, before, after, percentage, color, delay }:
           transition={{ duration: 1.5, delay, ease: "easeOut" }}
         />
         {/* Shimmer effect */}
-        {isInView && (
+        {!isMobile && isInView && (
           <motion.div
             className="absolute inset-y-0 w-20 rounded-full"
             style={{

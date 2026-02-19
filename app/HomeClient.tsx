@@ -29,6 +29,9 @@ import ClientMarquee from "@/components/ClientMarquee";
 import TechStackGrid from "@/components/TechStackGrid";
 import ResultsStats from "@/components/ResultsStats";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
+import SynapseNetwork3D from "@/components/SynapseNetwork3D";  // Added import
+import MagneticContainer from "@/components/MagneticContainer";
+import RealityShift from "@/components/RealityShift";
 
 export default function HomeClient() {
   const [activeService, setActiveService] = useState<number | null>(null);
@@ -73,6 +76,11 @@ export default function HomeClient() {
 
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center w-full px-6 sm:px-8 lg:px-12 pt-32 pb-24 overflow-x-clip">
+          {/* 3D Network Background for Hero */}
+          <div className="absolute inset-0 z-0">
+             <SynapseNetwork3D className="w-full h-full opacity-60 pointer-events-none md:pointer-events-auto" />
+          </div>
+
           {/* Floating Keywords */}
           <FloatingKeywords />
 
@@ -234,6 +242,7 @@ export default function HomeClient() {
 
         {/* Services Section */}
         <section className="relative w-full px-6 sm:px-8 bg-linear-to-b from-void-black via-data-dark-blue/10 to-void-black">
+          <RealityShift>
           <div className="w-full max-w-[1400px] mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -267,7 +276,9 @@ export default function HomeClient() {
                       viewport={{ once: true }}
                       onHoverStart={() => setActiveService(index)}
                       onHoverEnd={() => setActiveService(null)}
+                      className="h-full"
                     >
+                      <MagneticContainer className="h-full" range={150} force={0.2}>
                       <GlassCard
                         variant="dark"
                         glowEffect={true}
@@ -319,12 +330,14 @@ export default function HomeClient() {
                           </motion.div>
                         </div>
                       </GlassCard>
+                      </MagneticContainer>
                     </motion.div>
                   </TiltCard>
                 );
               })}
             </div>
           </div>
+          </RealityShift>
         </section>
 
         {/* Tech Stack Grid */}

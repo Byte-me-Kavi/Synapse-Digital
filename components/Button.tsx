@@ -1,5 +1,6 @@
 import { ReactNode, ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
+import { useSonic } from "@/components/SonicProvider";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -14,6 +15,8 @@ export default function Button({
   className,
   ...props
 }: ButtonProps) {
+  const { playHover, playClick } = useSonic();
+  
   const baseStyles =
     "inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-300 active:scale-95";
 
@@ -39,6 +42,11 @@ export default function Button({
         sizeStyles[size],
         className
       )}
+      onMouseEnter={() => playHover()}
+      onClick={(e) => {
+        playClick();
+        props.onClick?.(e);
+      }}
       {...props}
     >
       {children}
