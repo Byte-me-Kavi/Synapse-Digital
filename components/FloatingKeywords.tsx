@@ -24,17 +24,10 @@ export default function FloatingKeywords() {
             left: `${keyword.x}%`,
             top: `${keyword.y}%`,
           }}
-          initial={{ opacity: 0, scale: 0, filter: "blur(10px)" }}
+          initial={{ opacity: 0, scale: 0.6 }}
           animate={{
             opacity: [0, 0.9, 0.5, 0.9, 0],
             scale: [0.6, 1, 0.95, 1, 0.6],
-            filter: [
-              "blur(8px)",
-              "blur(0px)",
-              "blur(1px)",
-              "blur(0px)",
-              "blur(8px)",
-            ],
             x: [0, 15, -10, 20, 0],
             y: [0, -10, 5, -15, 0],
             rotate: [0, keyword.rotation, 0, -keyword.rotation, 0],
@@ -46,7 +39,7 @@ export default function FloatingKeywords() {
             ease: "easeInOut",
           }}
         >
-          {/* Glow layer */}
+          {/* Glow layer — uses text-shadow instead of animated filter:blur for GPU perf */}
           <div
             className="absolute inset-0 text-sm md:text-lg font-bold uppercase tracking-[0.2em] whitespace-nowrap"
             style={{
@@ -67,3 +60,4 @@ export default function FloatingKeywords() {
     </div>
   );
 }
+

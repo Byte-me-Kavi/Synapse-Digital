@@ -178,6 +178,24 @@ body {
   animation: float 6s ease-in-out infinite;
 }
 
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee-scroll {
+  animation: marquee-scroll 25s linear infinite;
+}
+
 /* Performance optimization for mobile */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -201,6 +219,20 @@ body {
   .glass,
   .glass-dark {
     background: rgba(10, 26, 47, 0.95);
+  }
+}
+
+/* Reduce blur on mobile — 24px blur forces expensive GPU compositing */
+@media (max-width: 768px) {
+  .glass {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .glass-dark {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(10, 26, 47, 0.75);
   }
 }
 

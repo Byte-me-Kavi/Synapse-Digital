@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 const ScanLine = () => (
   <motion.div
@@ -43,7 +44,7 @@ export default function SplashScreen({
   }, []);
 
   // Circuit line paths for the background
-  const circuitPaths = [
+  const allCircuitPaths = [
     "M 0 200 H 300 V 100 H 500",
     "M 800 0 V 150 H 600 V 300",
     "M 200 400 V 250 H 400 V 150 H 700",
@@ -53,6 +54,9 @@ export default function SplashScreen({
     "M 500 0 V 80 H 700 V 180",
     "M 350 400 V 320 H 550 V 220",
   ];
+
+  const isMobile = useIsMobile();
+  const circuitPaths = isMobile ? allCircuitPaths.slice(0, 5) : allCircuitPaths;
 
   // Glitch text effect offsets
   const glitchVariants = {

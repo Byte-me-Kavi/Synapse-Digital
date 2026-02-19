@@ -87,38 +87,20 @@ export default function HomeClient() {
               variant="dark" 
               className="relative overflow-hidden border-synapse-blue/40 hover:border-synapse-blue/70 transition-all duration-300 group cursor-pointer"
             >
-              {/* Animated Background */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-synapse-blue/10 to-transparent"
-                animate={{
-                  opacity: [0.3, 0.5, 0.3],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+              {/* Background glow — CSS animation instead of JS loop */}
+              <div
+                className="absolute inset-0 bg-gradient-to-br from-synapse-blue/10 to-transparent animate-pulse-slow"
+                style={{ opacity: 0.4 }}
               />
 
               <div className="relative z-10 p-4">
                 {/* Header */}
                 <div className="flex items-center gap-2 mb-3">
-                  <motion.div
-                    className="p-2 rounded-lg bg-synapse-blue/20 backdrop-blur-sm"
-                    animate={{
-                      boxShadow: [
-                        "0 0 10px rgba(0,194,255,0.3)",
-                        "0 0 20px rgba(0,194,255,0.5)",
-                        "0 0 10px rgba(0,194,255,0.3)",
-                      ],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                    }}
+                  <div
+                    className="p-2 rounded-lg bg-synapse-blue/20 backdrop-blur-sm animate-pulse-glow"
                   >
                     <Sparkles className="h-4 w-4 text-synapse-blue" />
-                  </motion.div>
+                  </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-1.5 mb-0.5">
                       <span className="px-1.5 py-0.5 text-[10px] font-bold bg-synapse-blue/30 text-synapse-blue rounded border border-synapse-blue/50">

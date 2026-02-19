@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 class Particle {
   x: number;
@@ -27,18 +28,15 @@ class Particle {
     this.x += this.vx;
     this.y += this.vy;
 
-    // React to scroll
     const scrollFactor =
       Math.sin(scrollOffset * 0.001 + this.colorPhase) * 2;
     this.vy += scrollFactor * 0.01;
 
-    // Wrap around edges
     if (this.x < 0) this.x = width;
     if (this.x > width) this.x = 0;
     if (this.y < 0) this.y = height;
     if (this.y > height) this.y = 0;
 
-    // Damping
     this.vx *= 0.99;
     this.vy *= 0.99;
   }
@@ -46,7 +44,6 @@ class Particle {
   draw(ctx: CanvasRenderingContext2D, scrollOffset: number) {
     if (!ctx) return;
 
-    // Color changes based on scroll
     const scrollColor = Math.sin(scrollOffset * 0.002 + this.colorPhase);
     const r = Math.floor(0 + scrollColor * 50);
     const g = Math.floor(194 + scrollColor * 61);
@@ -96,7 +93,6 @@ class GridLine {
   draw(ctx: CanvasRenderingContext2D, scrollOffset: number) {
     if (!ctx) return;
 
-    // Color shifts based on scroll
     const scrollColor = Math.sin(scrollOffset * 0.001);
     const r = Math.floor(0 + scrollColor * 100);
     const g = Math.floor(194 + scrollColor * 61);
@@ -109,6 +105,7 @@ class GridLine {
 
 export default function AnimatedBackground({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -117,7 +114,11 @@ export default function AnimatedBackground({ className }: { className?: string }
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Set canvas size
+    // Mobile-optimized counts
+    const particleCount = isMobile ? 60 : 150;
+    const gridLineCount = isMobile ? 15 : 30;
+    const connectionDistance = isMobile ? 80 : 150;
+
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = document.documentElement.scrollHeight;
@@ -125,26 +126,30 @@ export default function AnimatedBackground({ className }: { className?: string }
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    // Re-calculate on scroll changes
-    const handleResize = () => {
-      canvas.height = document.documentElement.scrollHeight;
+    // Throttle scroll-resize with rAF guard
+    let scrollTicking = false;
+    const handleScrollResize = () => {
+      if (!scrollTicking) {
+        scrollTicking = true;
+        requestAnimationFrame(() => {
+          canvas.height = document.documentElement.scrollHeight;
+          scrollTicking = false;
+        });
+      }
     };
-    window.addEventListener("scroll", handleResize);
+    window.addEventListener("scroll", handleScrollResize);
 
-    // Create particles and grid lines
     const particles: Particle[] = [];
     const gridLines: GridLine[] = [];
 
-    for (let i = 0; i < 150; i++) {
-        // Pass initial dimensions
+    for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle(canvas.width, canvas.height));
     }
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < gridLineCount; i++) {
       gridLines.push(new GridLine(canvas.width, canvas.height));
     }
 
-    // Animation loop
     let animationId: number;
     let time = 0;
 
@@ -155,20 +160,17 @@ export default function AnimatedBackground({ className }: { className?: string }
       ctx.fillStyle = "#050505";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Draw grid lines
       gridLines.forEach((line) => {
         line.update(time, currentScroll);
         line.draw(ctx, currentScroll);
       });
 
-      // Draw and update particles
       particles.forEach((particle) => {
-        // Pass current canvas dimensions to update for wrapping
         particle.update(currentScroll, canvas.width, canvas.height);
         particle.draw(ctx, currentScroll);
       });
 
-      // Draw connections between nearby particles with scroll-based color
+      // Connection lines with mobile-friendly distance threshold
       const scrollColor = Math.sin(currentScroll * 0.001);
       const r = Math.floor(0 + scrollColor * 50);
       const g = Math.floor(194 + scrollColor * 61);
@@ -181,8 +183,8 @@ export default function AnimatedBackground({ className }: { className?: string }
           const dy = particles[i].y - particles[j].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 150) {
-            const opacity = (1 - distance / 150) * 0.15;
+          if (distance < connectionDistance) {
+            const opacity = (1 - distance / connectionDistance) * 0.15;
             ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${opacity})`;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -199,10 +201,10 @@ export default function AnimatedBackground({ className }: { className?: string }
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);
-      window.removeEventListener("scroll", handleResize);
+      window.removeEventListener("scroll", handleScrollResize);
       cancelAnimationFrame(animationId);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <canvas

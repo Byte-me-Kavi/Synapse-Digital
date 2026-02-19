@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const clients = [
   { name: "New Kandy Fire", logo: "/companies/new-kandy-fire.png" },
@@ -32,20 +32,11 @@ export default function ClientMarquee() {
       <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-void-black to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-void-black to-transparent z-10 pointer-events-none" />
 
-      {/* Marquee track */}
-      <div className="flex items-center">
-        <motion.div
-          className="flex items-center gap-12 md:gap-20"
-          animate={{
-            x: ["0%", "-50%"],
-          }}
-          transition={{
-            x: {
-              duration: 25,
-              repeat: Infinity,
-              ease: "linear",
-            },
-          }}
+      {/* Marquee track — CSS animation instead of framer-motion for GPU compositing */}
+      <div className="flex items-center overflow-hidden">
+        <div
+          className="flex items-center gap-12 md:gap-20 animate-marquee-scroll"
+          style={{ willChange: "transform" }}
         >
           {marqueeClients.map((client, index) => (
             <div
@@ -63,8 +54,9 @@ export default function ClientMarquee() {
               </div>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 }
+

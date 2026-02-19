@@ -2,13 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { motion, useSpring } from "framer-motion";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 export default function LiquidCursor() {
   const [isPointer, setIsPointer] = useState(false);
-  const isTouchDevice = (() => {
-    if (typeof window === "undefined") return false;
-    return "ontouchstart" in window || navigator.maxTouchPoints > 0;
-  })();
+  const isTouchDevice = useIsMobile();
 
   const cursorX = useSpring(0, {
     damping: 25,
@@ -35,6 +33,8 @@ export default function LiquidCursor() {
   });
 
   useEffect(() => {
+    if (isTouchDevice) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
@@ -54,7 +54,7 @@ export default function LiquidCursor() {
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [cursorX, cursorY, blobX, blobY]);
+  }, [isTouchDevice, cursorX, cursorY, blobX, blobY]);
 
   // Don't render on touch devices
   if (isTouchDevice) {
@@ -65,7 +65,7 @@ export default function LiquidCursor() {
     <>
       {/* Main liquid blob */}
       <motion.div
-        className="fixed pointer-events-none z-9999 mix-blend-screen"
+        className="fixed pointer-events-none z-[9999] mix-blend-screen"
         style={{
           x: blobX,
           y: blobY,
@@ -91,7 +91,7 @@ export default function LiquidCursor() {
 
       {/* Center dot */}
       <motion.div
-        className="fixed pointer-events-none z-9999"
+        className="fixed pointer-events-none z-[9999]"
         style={{
           x: cursorX,
           y: cursorY,
@@ -116,7 +116,7 @@ export default function LiquidCursor() {
       {[...Array(3)].map((_, i) => (
         <motion.div
           key={i}
-          className="fixed pointer-events-none z-9998 rounded-full border border-synapse-blue/30"
+          className="fixed pointer-events-none z-[9998] rounded-full border border-synapse-blue/30"
           style={{
             x: blobX,
             y: blobY,

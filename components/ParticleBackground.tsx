@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 export default function ParticleBackground({
   className,
@@ -11,6 +12,7 @@ export default function ParticleBackground({
   className?: string;
 }) {
   const [init, setInit] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     initParticlesEngine(async (engine: Engine) => {
@@ -34,14 +36,14 @@ export default function ParticleBackground({
             value: "transparent",
           },
         },
-        fpsLimit: 60,
+        fpsLimit: isMobile ? 30 : 60,
         particles: {
           color: {
             value: "#00C2FF",
           },
           links: {
             color: "#00C2FF",
-            distance: 150,
+            distance: isMobile ? 120 : 150,
             enable: true,
             opacity: 0.3,
             width: 1,
@@ -53,14 +55,14 @@ export default function ParticleBackground({
               default: "bounce",
             },
             random: false,
-            speed: 1,
+            speed: isMobile ? 0.8 : 1,
             straight: false,
           },
           number: {
             density: {
               enable: true,
             },
-            value: 40,
+            value: isMobile ? 20 : 40,
           },
           opacity: {
             value: 0.5,
@@ -76,7 +78,7 @@ export default function ParticleBackground({
         interactivity: {
           events: {
             onHover: {
-              enable: true,
+              enable: !isMobile,
               mode: "grab",
             },
             resize: {
@@ -96,3 +98,4 @@ export default function ParticleBackground({
     />
   );
 }
+
