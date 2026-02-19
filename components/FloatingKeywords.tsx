@@ -49,9 +49,9 @@ export default function FloatingKeywords() {
           >
             {keyword.text}
           </div>
-          {/* Text layer */}
+          {/* Text layer - Changed to static white for performance and visibility */}
           <div
-            className="relative text-sm md:text-lg font-bold uppercase tracking-[0.2em] whitespace-nowrap bg-gradient-to-r from-synapse-blue via-[#A855F7] to-synapse-blue bg-clip-text text-transparent bg-[length:200%_auto] animate-[gradient-shift_3s_ease-in-out_infinite]"
+            className="relative text-sm md:text-lg font-bold uppercase tracking-[0.2em] whitespace-nowrap text-signal-white"
           >
             {keyword.text}
           </div>

@@ -115,8 +115,8 @@ export default function AnimatedBackground({ className }: { className?: string }
     if (!ctx) return;
 
     // Mobile-optimized counts - Aggressive
-    const particleCount = isMobile ? 15 : 150;
-    const gridLineCount = isMobile ? 8 : 30;
+    const particleCount = isMobile ? 8 : 150;
+    const gridLineCount = isMobile ? 4 : 30;
     // No connections on mobile to save O(n^2) loop
     const enableConnections = !isMobile;
     const connectionDistance = 150;

@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 interface TiltCardProps {
   children: React.ReactNode;
@@ -18,7 +19,8 @@ export default function TiltCard({
 }: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-
+  const isMobile = useIsMobile();
+  
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -40,7 +42,7 @@ export default function TiltCard({
   const glareY = useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
+    if (!ref.current || isMobile) return;
 
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;
@@ -60,6 +62,10 @@ export default function TiltCard({
     y.set(0);
     setIsHovered(false);
   };
+
+  if (isMobile) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div

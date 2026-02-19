@@ -43,7 +43,7 @@ export default function ParticleBackground({
           },
           links: {
             color: "#00C2FF",
-            distance: isMobile ? 120 : 150,
+            distance: isMobile ? 100 : 150,
             enable: true,
             opacity: 0.3,
             width: 1,
@@ -55,14 +55,14 @@ export default function ParticleBackground({
               default: "bounce",
             },
             random: false,
-            speed: isMobile ? 0.8 : 1,
+            speed: isMobile ? 0.5 : 1,
             straight: false,
           },
           number: {
             density: {
               enable: true,
             },
-            value: isMobile ? 20 : 40,
+            value: isMobile ? 12 : 40,
           },
           opacity: {
             value: 0.5,
