@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo, useRef } from "react";
+import React, { useEffect, useState, useMemo, useRef, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface CyberTextCycleProps {
@@ -22,16 +22,16 @@ export default function CyberTextCycle({
   holdDuration = 4000,
 }: CyberTextCycleProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
   const longestText = useMemo(
     () => texts.reduce((a, b) => (a.length > b.length ? a : b), ""),
     [texts]
   );
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const cycleTime = holdDuration + 2200;

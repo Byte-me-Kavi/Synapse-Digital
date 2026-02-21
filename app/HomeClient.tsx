@@ -8,9 +8,6 @@ import {
   Share2,
   TrendingUp,
   Eye,
-  Sparkles,
-  ExternalLink,
-  Activity,
 } from "lucide-react";
 import React, { useState } from "react";
 import ParticleBackground from "@/components/ParticleBackground";
