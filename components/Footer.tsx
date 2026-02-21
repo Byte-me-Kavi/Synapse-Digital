@@ -10,12 +10,12 @@ export default function Footer() {
   const links = {
     services: [
       { name: "Web Solutions", href: "/services" },
-      { name: "NavLens Analytics", href: "/services#navlens" },
+      { name: "NavLens Analytics", href: "https://www.navlensanalytics.com" },
       { name: "Social Media", href: "/social-media-management" },
 
     ],
     company: [
-      { name: "About Us", href: "/#about" },
+      { name: "About Us", href: "/about" },
       { name: "Our Work", href: "/projects" },
       { name: "Contact", href: "/contact" },
     ],

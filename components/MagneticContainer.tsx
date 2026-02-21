@@ -25,30 +25,35 @@ export default function MagneticContainer({
   const springX = useSpring(x, springConfig);
   const springY = useSpring(y, springConfig);
 
+  const rafId = useRef(0);
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current || isMobile) return;
-    
-    const rect = ref.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    const distanceX = e.clientX - centerX;
-    const distanceY = e.clientY - centerY;
-    const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
-    
-    if (distance < range) {
-        // Pull towards mouse
+    if (rafId.current) return;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+    rafId.current = requestAnimationFrame(() => {
+      rafId.current = 0;
+      if (!ref.current) return;
+      const rect = ref.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const distanceX = clientX - centerX;
+      const distanceY = clientY - centerY;
+      const distSq = distanceX * distanceX + distanceY * distanceY;
+      const rangeSq = range * range;
+
+      if (distSq < rangeSq) {
+        const distance = Math.sqrt(distSq);
         const pull = (1 - distance / range) * force * range;
-        // Normalize direction
         const dirX = distanceX / distance;
         const dirY = distanceY / distance;
-        
         x.set(dirX * pull);
         y.set(dirY * pull);
-    } else {
+      } else {
         x.set(0);
         y.set(0);
-    }
+      }
+    });
   };
 
   const handleMouseLeave = () => {

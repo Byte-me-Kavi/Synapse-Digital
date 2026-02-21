@@ -41,20 +41,19 @@ export default function TiltCard({
   const glareX = useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"]);
   const glareY = useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"]);
 
+  const rafId = useRef(0);
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current || isMobile) return;
-
-    const rect = ref.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    const xPercentage = mouseX / width - 0.5;
-    const yPercentage = mouseY / height - 0.5;
-
-    x.set(xPercentage);
-    y.set(yPercentage);
+    if (rafId.current) return;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+    rafId.current = requestAnimationFrame(() => {
+      rafId.current = 0;
+      if (!ref.current) return;
+      const rect = ref.current.getBoundingClientRect();
+      x.set((clientX - rect.left) / rect.width - 0.5);
+      y.set((clientY - rect.top) / rect.height - 0.5);
+    });
   };
 
   const handleMouseLeave = () => {

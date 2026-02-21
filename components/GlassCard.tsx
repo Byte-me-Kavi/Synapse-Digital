@@ -23,14 +23,18 @@ export default function GlassCard({
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
+  const rafId = useRef(0);
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current || !glowEffect) return;
-
-    const rect = ref.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    setMousePosition({ x, y });
+    if (rafId.current) return;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+    rafId.current = requestAnimationFrame(() => {
+      rafId.current = 0;
+      if (!ref.current) return;
+      const rect = ref.current.getBoundingClientRect();
+      setMousePosition({ x: clientX - rect.left, y: clientY - rect.top });
+    });
   };
 
   if (glowEffect) {

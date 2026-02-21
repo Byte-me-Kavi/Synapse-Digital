@@ -18,7 +18,7 @@ import GlassCard from "@/components/GlassCard";
 import Button from "@/components/Button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Typewriter from "@/components/Typewriter";
+import CyberTextCycle from "@/components/CyberTextCycle";
 
 import TiltCard from "@/components/TiltCard";
 import { AnimatedCircuit } from "@/components/AnimatedSVG";
@@ -29,7 +29,6 @@ import ClientMarquee from "@/components/ClientMarquee";
 import TechStackGrid from "@/components/TechStackGrid";
 import ResultsStats from "@/components/ResultsStats";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
-import SynapseNetwork3D from "@/components/SynapseNetwork3D";  // Added import
 import MagneticContainer from "@/components/MagneticContainer";
 import RealityShift from "@/components/RealityShift";
 
@@ -76,33 +75,26 @@ export default function HomeClient() {
 
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center w-full px-6 sm:px-8 lg:px-12 pt-32 pb-24 overflow-x-clip">
-          {/* 3D Network Background for Hero */}
-          <div className="absolute inset-0 z-0">
-             <SynapseNetwork3D className="w-full h-full opacity-60 pointer-events-none md:pointer-events-auto" />
-          </div>
-
           {/* Floating Keywords */}
           <FloatingKeywords />
 
-          {/* Navlens Feature Banner - Top Right */}
+          {/* Navlens Feature Banner - Top Right (commented out)
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
             className="absolute top-25 right-4 md:right-8 lg:right-12 z-30 hidden md:block max-w-xs lg:max-w-sm"
           >
-            <GlassCard 
-              variant="dark" 
+            <GlassCard
+              variant="dark"
               className="relative overflow-hidden border-synapse-blue/40 hover:border-synapse-blue/70 transition-all duration-300 group cursor-pointer"
             >
-              {/* Background glow — CSS animation instead of JS loop */}
               <div
                 className="absolute inset-0 bg-gradient-to-br from-synapse-blue/10 to-transparent animate-pulse-slow"
                 style={{ opacity: 0.4 }}
               />
 
               <div className="relative z-10 p-4">
-                {/* Header */}
                 <div className="flex items-center gap-2 mb-3">
                   <div
                     className="p-2 rounded-lg bg-synapse-blue/20 backdrop-blur-sm animate-pulse-glow"
@@ -124,7 +116,6 @@ export default function HomeClient() {
                   </div>
                 </div>
 
-                {/* Features Grid */}
                 <div className="grid grid-cols-2 gap-2 mb-3">
                   <div className="text-center p-2 bg-synapse-blue/5 rounded border border-synapse-blue/20">
                     <Activity className="h-3 w-3 text-synapse-blue mx-auto mb-1" />
@@ -136,10 +127,9 @@ export default function HomeClient() {
                   </div>
                 </div>
 
-                {/* CTA Buttons */}
                 <div className="flex gap-2">
-                  <a 
-                    href="/services#navlens" 
+                  <a
+                    href="/services#navlens"
                     className="flex-1"
                   >
                     <button className="w-full px-3 py-1.5 text-xs font-semibold bg-synapse-blue hover:bg-synapse-blue/90 text-signal-white rounded transition-all flex items-center justify-center gap-1">
@@ -147,9 +137,9 @@ export default function HomeClient() {
                       <ArrowRight className="h-3 w-3" />
                     </button>
                   </a>
-                  <a 
-                    href="https://navlensanalytics.com" 
-                    target="_blank" 
+                  <a
+                    href="https://navlensanalytics.com"
+                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     <button className="px-3 py-1.5 text-xs font-semibold border border-synapse-blue/30 hover:border-synapse-blue text-synapse-blue rounded transition-all flex items-center justify-center gap-1">
@@ -160,6 +150,7 @@ export default function HomeClient() {
               </div>
             </GlassCard>
           </motion.div>
+          */}
 
           <div className="w-full max-w-[1400px] mx-auto relative z-20">
             <motion.div
@@ -188,22 +179,19 @@ export default function HomeClient() {
                 </div>
               </motion.div>
 
-              {/* Headline with Typewriter */}
+              {/* Headline with Cyber Text Cycle */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-circuit-silver max-w-3xl mx-auto px-4 leading-relaxed"
               >
-                <Typewriter
-                  text={[
+                <CyberTextCycle
+                  texts={[
                     "We Build Websites, Run Your Social Media & Drive Traffic Through SEO",
                     "Get More Customers Online - Fast Results",
                     "Professional Web Design + Marketing That Actually Works",
                   ]}
-                  delay={500}
-                  speed={80}
-                  loop={true}
                   className="text-synapse-blue font-semibold"
                 />
               </motion.div>

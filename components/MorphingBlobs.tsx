@@ -115,8 +115,16 @@ export default function MorphingBlobs() {
 
     let animationId: number;
     let time = 0;
+    let lastFrameTime = 0;
+    const frameInterval = 1000 / 30; // Target 30fps for performance
 
-    const animate = () => {
+    const animate = (currentTime: number) => {
+      animationId = requestAnimationFrame(animate);
+
+      const elapsed = currentTime - lastFrameTime;
+      if (elapsed < frameInterval) return;
+      lastFrameTime = currentTime - (elapsed % frameInterval);
+
       time += 0.01;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -132,9 +140,10 @@ export default function MorphingBlobs() {
         for (let j = i + 1; j < blobs.length; j++) {
           const dx = blobs[i].x - blobs[j].x;
           const dy = blobs[i].y - blobs[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
 
-          if (distance < 400) {
+          if (distSq < 160000) { // 400 * 400
+            const distance = Math.sqrt(distSq);
             const opacity = (1 - distance / 400) * 0.1;
             ctx.strokeStyle = `rgba(0, 194, 255, ${opacity})`;
             ctx.beginPath();
@@ -144,11 +153,9 @@ export default function MorphingBlobs() {
           }
         }
       }
-
-      animationId = requestAnimationFrame(animate);
     };
 
-    animate();
+    animate(0);
 
     return () => {
       window.removeEventListener("resize", handleResize);

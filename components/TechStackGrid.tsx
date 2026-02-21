@@ -26,23 +26,19 @@ const techStack = [
   { name: "Framer", icon: "✦", color: "#0055FF", category: "Animation" },
 ];
 
-// Each icon gets a unique float pattern
-function getFloatAnimation(index: number) {
-  const patterns = [
-    { y: [0, -8, 0, 6, 0], x: [0, 4, 0, -3, 0], rotate: [0, 3, 0, -2, 0] },
-    { y: [0, 6, 0, -7, 0], x: [0, -5, 0, 4, 0], rotate: [0, -2, 0, 3, 0] },
-    { y: [0, -6, 0, 8, 0], x: [0, 3, 0, -5, 0], rotate: [0, 2, 0, -3, 0] },
-    { y: [0, 7, 0, -5, 0], x: [0, -4, 0, 3, 0], rotate: [0, -3, 0, 2, 0] },
-    { y: [0, -9, 0, 5, 0], x: [0, 5, 0, -4, 0], rotate: [0, 4, 0, -2, 0] },
-  ];
-  return patterns[index % patterns.length];
-}
-
 export default function TechStackGrid() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <section className="relative w-full py-20 md:py-24 px-6 sm:px-8 lg:px-12 overflow-hidden">
+      <style>{`
+        @keyframes float-0 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(4px, -8px) rotate(3deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(-3px, 6px) rotate(-2deg); } }
+        @keyframes float-1 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(-5px, 6px) rotate(-2deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(4px, -7px) rotate(3deg); } }
+        @keyframes float-2 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(3px, -6px) rotate(2deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(-5px, 8px) rotate(-3deg); } }
+        @keyframes float-3 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(-4px, 7px) rotate(-3deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(3px, -5px) rotate(2deg); } }
+        @keyframes float-4 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(5px, -9px) rotate(4deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(-4px, 5px) rotate(-2deg); } }
+        @keyframes glow-pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.7; } }
+      `}</style>
       <div className="w-full max-w-[1200px] mx-auto">
         {/* Header */}
         <motion.div
@@ -64,7 +60,6 @@ export default function TechStackGrid() {
         {/* Grid */}
         <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-10 gap-3 md:gap-4">
           {techStack.map((tech, index) => {
-            const floatAnim = getFloatAnimation(index);
             return (
               <motion.div
                 key={tech.name}
@@ -81,18 +76,10 @@ export default function TechStackGrid() {
                 onMouseLeave={() => setHoveredIndex(null)}
                 className="relative group cursor-pointer"
               >
-                {/* Continuous floating animation wrapper */}
-                <motion.div
-                  animate={{
-                    y: floatAnim.y,
-                    x: floatAnim.x,
-                    rotate: floatAnim.rotate,
-                  }}
-                  transition={{
-                    duration: 4 + (index % 3) * 1.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: index * 0.2,
+                {/* Continuous floating animation - CSS for performance */}
+                <div
+                  style={{
+                    animation: `float-${index % 5} ${4 + (index % 3) * 1.5}s ease-in-out ${index * 0.2}s infinite`,
                   }}
                 >
                   <motion.div
@@ -109,7 +96,7 @@ export default function TechStackGrid() {
                     }}
                   >
                     {/* Pulse glow background */}
-                    <motion.div
+                    <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{
                         background: `radial-gradient(circle at center, ${tech.color}15 0%, transparent 70%)`,
@@ -117,17 +104,11 @@ export default function TechStackGrid() {
                     />
 
                     {/* Ambient idle glow */}
-                    <motion.div
+                    <div
                       className="absolute inset-0"
                       style={{
                         background: `radial-gradient(circle at center, ${tech.color}08 0%, transparent 70%)`,
-                      }}
-                      animate={{ opacity: [0.3, 0.7, 0.3] }}
-                      transition={{
-                        duration: 3 + (index % 4),
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: index * 0.15,
+                        animation: `glow-pulse ${3 + (index % 4)}s ease-in-out ${index * 0.15}s infinite`,
                       }}
                     />
 
@@ -141,7 +122,7 @@ export default function TechStackGrid() {
                       {tech.name}
                     </span>
                   </motion.div>
-                </motion.div>
+                </div>
 
                 {/* Tooltip */}
                 {hoveredIndex === index && (
