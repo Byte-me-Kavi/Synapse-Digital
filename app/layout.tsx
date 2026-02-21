@@ -6,7 +6,7 @@ import ClientWrappers from "@/components/ClientWrappers";
 import JsonLd from "@/components/JsonLd";
 import SplashScreen from "@/components/SplashScreen";
 import SynapseBotWrapper from "@/components/SynapseBotWrapper";
-import { SonicProvider } from "@/components/SonicProvider";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -108,15 +108,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-void-black text-signal-white flex flex-col min-h-screen w-full overflow-x-hidden relative`}
       >
-        <SonicProvider>
-          <AnimatedBackground />
+        <AnimatedBackground />
           <ClientWrappers />
           <JsonLd />
           <div className="relative z-10 w-full">
             <SplashScreen>{children}</SplashScreen>
           </div>
           <SynapseBotWrapper />
-        </SonicProvider>
 
         {/* <script 
           async 

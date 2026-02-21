@@ -22,11 +22,16 @@ export default function CyberTextCycle({
   holdDuration = 4000,
 }: CyberTextCycleProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   const longestText = useMemo(
     () => texts.reduce((a, b) => (a.length > b.length ? a : b), ""),
     [texts]
   );
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const cycleTime = holdDuration + 2200;
@@ -44,14 +49,18 @@ export default function CyberTextCycle({
       </span>
 
       <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-        <AnimatePresence mode="wait">
-          <ScatterText
-            key={currentIndex}
-            text={texts[currentIndex]}
-            seed={currentIndex}
-            className={className}
-          />
-        </AnimatePresence>
+        {mounted ? (
+          <AnimatePresence mode="wait">
+            <ScatterText
+              key={currentIndex}
+              text={texts[currentIndex]}
+              seed={currentIndex}
+              className={className}
+            />
+          </AnimatePresence>
+        ) : (
+          <span className={className}>{texts[currentIndex]}</span>
+        )}
       </div>
     </div>
   );
@@ -111,7 +120,6 @@ function ScrambleChar({
 
   useEffect(() => {
     if (isSpace) {
-      setDisplayChar(" ");
       return;
     }
 

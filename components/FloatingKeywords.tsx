@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useIsMobile } from "@/lib/useIsMobile";
 
 const KEYWORD_DATA = [
   { text: "Web Development", x: 6, y: 15, rotation: -8 },
@@ -15,8 +14,6 @@ const KEYWORD_DATA = [
 ];
 
 export default function FloatingKeywords() {
-  const isMobile = useIsMobile();
-
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       {KEYWORD_DATA.map((keyword, index) => (
@@ -27,21 +24,15 @@ export default function FloatingKeywords() {
             left: `${keyword.x}%`,
             top: `${keyword.y}%`,
           }}
-          initial={isMobile ? { 
-            opacity: 0.6, 
-            scale: 0.9, 
-            x: 0, 
-            y: 0, 
-            rotate: keyword.rotation 
-          } : { opacity: 0, scale: 0.6 }}
-          animate={isMobile ? undefined : {
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{
             opacity: [0, 0.9, 0.5, 0.9, 0],
             scale: [0.6, 1, 0.95, 1, 0.6],
             x: [0, 15, -10, 20, 0],
             y: [0, -10, 5, -15, 0],
             rotate: [0, keyword.rotation, 0, -keyword.rotation, 0],
           }}
-          transition={isMobile ? undefined : {
+          transition={{
             duration: 10 + index * 1.5,
             delay: index * 0.6,
             repeat: Infinity,
