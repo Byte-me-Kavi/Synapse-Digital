@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 const KEYWORD_DATA = [
   { text: "Web Development", x: 6, y: 15, rotation: -8 },
@@ -13,10 +14,15 @@ const KEYWORD_DATA = [
   { text: "Web Design", x: 5, y: 35, rotation: 4 },
 ];
 
+// Show only 3 keywords on mobile, static (no infinite animation)
+const MOBILE_KEYWORDS = KEYWORD_DATA.slice(0, 3);
+
 export default function FloatingKeywords() {
+  const isMobile = useIsMobile();
+  const keywords = isMobile ? MOBILE_KEYWORDS : KEYWORD_DATA;
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-      {KEYWORD_DATA.map((keyword, index) => (
+      {keywords.map((keyword, index) => (
         <motion.div
           key={index}
           className="absolute"
@@ -25,19 +31,27 @@ export default function FloatingKeywords() {
             top: `${keyword.y}%`,
           }}
           initial={{ opacity: 0, scale: 0.6 }}
-          animate={{
-            opacity: [0, 0.9, 0.5, 0.9, 0],
-            scale: [0.6, 1, 0.95, 1, 0.6],
-            x: [0, 15, -10, 20, 0],
-            y: [0, -10, 5, -15, 0],
-            rotate: [0, keyword.rotation, 0, -keyword.rotation, 0],
-          }}
-          transition={{
-            duration: 10 + index * 1.5,
-            delay: index * 0.6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={
+            isMobile
+              ? { opacity: 0.7, scale: 1 }
+              : {
+                  opacity: [0, 0.9, 0.5, 0.9, 0],
+                  scale: [0.6, 1, 0.95, 1, 0.6],
+                  x: [0, 15, -10, 20, 0],
+                  y: [0, -10, 5, -15, 0],
+                  rotate: [0, keyword.rotation, 0, -keyword.rotation, 0],
+                }
+          }
+          transition={
+            isMobile
+              ? { duration: 1, delay: index * 0.3 }
+              : {
+                  duration: 10 + index * 1.5,
+                  delay: index * 0.6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }
+          }
         >
           {/* Glow layer — uses text-shadow instead of animated filter:blur for GPU perf */}
           <div

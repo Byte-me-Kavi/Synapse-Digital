@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState, useMemo } from "react";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 export default function DigitalTwin() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [visitorId, setVisitorId] = useState<string>("0000");
   const [sessionData, setSessionData] = useState({ scroll: 0, clicks: 0, time: 0 });
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     // Generate or retrieve ID
@@ -16,7 +18,7 @@ export default function DigitalTwin() {
     }
     setVisitorId(id);
 
-    // Track session data
+    // Track session data — slower interval on mobile (5s vs 1s)
     const startTime = Date.now();
     let clicks = 0;
     
@@ -29,7 +31,7 @@ export default function DigitalTwin() {
             clicks: clicks,
             time: Math.floor((Date.now() - startTime) / 1000)
         });
-    }, 1000);
+    }, isMobile ? 5000 : 1000);
 
     return () => {
         window.removeEventListener("click", clickHandler);

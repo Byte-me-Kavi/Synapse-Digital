@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 const techStack = [
   { name: "React", icon: "⚛️", color: "#61DAFB", category: "Frontend" },
@@ -28,17 +29,21 @@ const techStack = [
 
 export default function TechStackGrid() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const isMobile = useIsMobile();
 
   return (
     <section className="relative w-full py-20 md:py-24 px-6 sm:px-8 lg:px-12 overflow-hidden">
-      <style>{`
-        @keyframes float-0 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(4px, -8px) rotate(3deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(-3px, 6px) rotate(-2deg); } }
-        @keyframes float-1 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(-5px, 6px) rotate(-2deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(4px, -7px) rotate(3deg); } }
-        @keyframes float-2 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(3px, -6px) rotate(2deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(-5px, 8px) rotate(-3deg); } }
-        @keyframes float-3 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(-4px, 7px) rotate(-3deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(3px, -5px) rotate(2deg); } }
-        @keyframes float-4 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(5px, -9px) rotate(4deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(-4px, 5px) rotate(-2deg); } }
-        @keyframes glow-pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.7; } }
-      `}</style>
+      {/* Only inject floating/glow keyframes on desktop */}
+      {!isMobile && (
+        <style>{`
+          @keyframes float-0 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(4px, -8px) rotate(3deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(-3px, 6px) rotate(-2deg); } }
+          @keyframes float-1 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(-5px, 6px) rotate(-2deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(4px, -7px) rotate(3deg); } }
+          @keyframes float-2 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(3px, -6px) rotate(2deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(-5px, 8px) rotate(-3deg); } }
+          @keyframes float-3 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(-4px, 7px) rotate(-3deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(3px, -5px) rotate(2deg); } }
+          @keyframes float-4 { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 25% { transform: translate(5px, -9px) rotate(4deg); } 50% { transform: translate(0px, 0px) rotate(0deg); } 75% { transform: translate(-4px, 5px) rotate(-2deg); } }
+          @keyframes glow-pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.7; } }
+        `}</style>
+      )}
       <div className="w-full max-w-[1200px] mx-auto">
         {/* Header */}
         <motion.div
@@ -76,16 +81,20 @@ export default function TechStackGrid() {
                 onMouseLeave={() => setHoveredIndex(null)}
                 className="relative group cursor-pointer"
               >
-                {/* Continuous floating animation - CSS for performance */}
+                {/* Continuous floating animation - CSS for performance (desktop only) */}
                 <div
-                  style={{
-                    animation: `float-${index % 5} ${4 + (index % 3) * 1.5}s ease-in-out ${index * 0.2}s infinite`,
-                  }}
+                  style={
+                    isMobile
+                      ? undefined
+                      : {
+                          animation: `float-${index % 5} ${4 + (index % 3) * 1.5}s ease-in-out ${index * 0.2}s infinite`,
+                        }
+                  }
                 >
                   <motion.div
                     whileHover={{ scale: 1.2, y: -10 }}
                     transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                    className="relative flex flex-col items-center justify-center aspect-square rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-sm overflow-hidden"
+                    className="relative flex flex-col items-center justify-center aspect-square rounded-xl border border-white/5 bg-white/[0.03] overflow-hidden"
                     style={{
                       boxShadow:
                         hoveredIndex === index
@@ -103,14 +112,16 @@ export default function TechStackGrid() {
                       }}
                     />
 
-                    {/* Ambient idle glow */}
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background: `radial-gradient(circle at center, ${tech.color}08 0%, transparent 70%)`,
-                        animation: `glow-pulse ${3 + (index % 4)}s ease-in-out ${index * 0.15}s infinite`,
-                      }}
-                    />
+                    {/* Ambient idle glow - desktop only */}
+                    {!isMobile && (
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background: `radial-gradient(circle at center, ${tech.color}08 0%, transparent 70%)`,
+                          animation: `glow-pulse ${3 + (index % 4)}s ease-in-out ${index * 0.15}s infinite`,
+                        }}
+                      />
+                    )}
 
                     {/* Icon */}
                     <span className="relative text-xl md:text-2xl mb-1 transition-transform duration-300 group-hover:scale-110">

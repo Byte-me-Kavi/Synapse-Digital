@@ -15,12 +15,14 @@ export default function ParticleBackground({
   const isMobile = useIsMobile();
 
   useEffect(() => {
+    // Skip loading the entire particle engine on mobile
+    if (isMobile) return;
     initParticlesEngine(async (engine: Engine) => {
       await loadSlim(engine);
     }).then(() => {
       setInit(true);
     });
-  }, []);
+  }, [isMobile]);
 
   if (!init || isMobile) {
     return null;

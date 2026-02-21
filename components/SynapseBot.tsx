@@ -144,9 +144,10 @@ const CONFETTI_COLORS = ["#00C2FF", "#A855F7", "#00FF88", "#FFB224", "#FF0080", 
 let particleIdCounter = 0;
 
 // ══════════════════════════════════════
-// Particle Layer
+// Particle Layer (desktop only)
 // ══════════════════════════════════════
 function ParticleLayer({ particles }: { particles: Particle[] }) {
+  if (particles.length === 0) return null;
   return (
     <div className="fixed inset-0 z-[9996] pointer-events-none overflow-hidden">
       {particles.map((p) => {
@@ -312,9 +313,9 @@ export default function SynapseBot() {
     } catch { /* */ }
   }, []);
 
-  // ── Particle physics ──
+  // ── Particle physics (desktop only) ──
   useEffect(() => {
-    if (particles.length === 0) return;
+    if (particles.length === 0 || isMobile) return;
     const frame = requestAnimationFrame(() => {
       setParticles((prev) =>
         prev
@@ -329,7 +330,7 @@ export default function SynapseBot() {
       );
     });
     return () => cancelAnimationFrame(frame);
-  }, [particles]);
+  }, [particles, isMobile]);
 
   // ── Detect mobile ──
   useEffect(() => {
@@ -382,43 +383,50 @@ export default function SynapseBot() {
     lastSectionRef.current = 0;
     const t = setTimeout(() => {
       if (visitCount > 1 && pathname === "/") {
-        setTempMood("happy", 4000);
+        if (!isMobile) setTempMood("happy", 4000);
         showBubble(<><BsStars className="inline text-yellow-400" /> Welcome back! Visit #{visitCount}</>, 5000);
       } else {
-        setTempMood("waving", 3000);
+        if (!isMobile) setTempMood("waving", 3000);
         showBubble(<>{msgs[0].icon} {msgs[0].message}</>, 5000);
       }
     }, 1500);
     return () => clearTimeout(t);
-  }, [pathname, visitCount, showBubble, setTempMood]);
+  }, [pathname, visitCount, showBubble, setTempMood, isMobile]);
 
-  // ── Scroll messages + mood ──
+  // ── Scroll messages + mood (throttled on mobile) ──
   useEffect(() => {
+    let scrollTicking = false;
     const handleScroll = () => {
-      try {
-        const scrollY = window.scrollY;
-        const msgs = PAGE_MESSAGES[pathname] || DEFAULT_MESSAGES;
-        let currentSection = 0;
-        for (let i = msgs.length - 1; i >= 0; i--) {
-          if (scrollY >= msgs[i].threshold) {
-            currentSection = i;
-            break;
+      if (scrollTicking) return;
+      scrollTicking = true;
+      requestAnimationFrame(() => {
+        scrollTicking = false;
+        try {
+          const scrollY = window.scrollY;
+          const msgs = PAGE_MESSAGES[pathname] || DEFAULT_MESSAGES;
+          let currentSection = 0;
+          for (let i = msgs.length - 1; i >= 0; i--) {
+            if (scrollY >= msgs[i].threshold) {
+              currentSection = i;
+              break;
+            }
           }
-        }
-        if (currentSection !== lastSectionRef.current) {
-          lastSectionRef.current = currentSection;
-          const m = msgs[currentSection];
-          showBubble(<>{m.icon} {m.message}</>);
-          setTempMood("curious", 2500);
-        }
-      } catch { /* */ }
+          if (currentSection !== lastSectionRef.current) {
+            lastSectionRef.current = currentSection;
+            const m = msgs[currentSection];
+            showBubble(<>{m.icon} {m.message}</>);
+            if (!isMobile) setTempMood("curious", 2500);
+          }
+        } catch { /* */ }
+      });
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [pathname, showBubble, setTempMood]);
+  }, [pathname, showBubble, setTempMood, isMobile]);
 
-  // ── Idle → sleepy ──
+  // ── Idle → sleepy (desktop only — skip on mobile to avoid timers) ──
   useEffect(() => {
+    if (isMobile) return;
     const resetSleep = () => {
       try {
         if (sleepTimeoutRef.current) clearTimeout(sleepTimeoutRef.current);
@@ -439,9 +447,9 @@ export default function SynapseBot() {
       window.removeEventListener("mousemove", resetSleep);
       window.removeEventListener("scroll", resetSleep);
     };
-  }, [mood, showBubble, spawnParticles]);
+  }, [mood, showBubble, spawnParticles, isMobile]);
 
-  // ── Idle nudge ──
+  // ── Idle nudge (longer delay on mobile) ──
   useEffect(() => {
     const pool = IDLE_MESSAGES[pathname] || IDLE_MESSAGES._default;
     const resetIdle = () => {
@@ -450,7 +458,7 @@ export default function SynapseBot() {
         idleTimeoutRef.current = setTimeout(() => {
           const pick = pool[Math.floor(Math.random() * pool.length)];
           showBubble(<>{pick.icon} {pick.message}</>);
-        }, 15000);
+        }, isMobile ? 30000 : 15000);
       } catch { /* */ }
     };
     resetIdle();
@@ -461,10 +469,11 @@ export default function SynapseBot() {
       window.removeEventListener("mousemove", resetIdle);
       window.removeEventListener("scroll", resetIdle);
     };
-  }, [pathname, showBubble]);
+  }, [pathname, showBubble, isMobile]);
 
-  // ── CTA hover → excited ──
+  // ── CTA hover → excited (desktop only) ──
   useEffect(() => {
+    if (isMobile) return;
     const handleMouseOver = (e: MouseEvent) => {
       try {
         const target = e.target as HTMLElement;
@@ -481,7 +490,7 @@ export default function SynapseBot() {
     };
     document.addEventListener("mouseover", handleMouseOver, { passive: true });
     return () => document.removeEventListener("mouseover", handleMouseOver);
-  }, [setTempMood, spawnParticles]);
+  }, [setTempMood, spawnParticles, isMobile]);
 
   // ── Petting ──
   const handlePetStart = useCallback(() => {
@@ -514,16 +523,18 @@ export default function SynapseBot() {
     return () => clearInterval(interval);
   }, [isPetting, spawnParticles]);
 
-  // ── Click → confetti ──
+  // ── Click → confetti (desktop only) ──
   const handleBotClick = useCallback(() => {
     try {
       setIsOpen((prev) => !prev);
       setShowMessage(false);
-      setTempMood("excited", 2000);
-      const pos = botPosRef.current;
-      spawnParticles("confetti", pos.x + 12, pos.y + 12, 18);
+      if (!isMobile) {
+        setTempMood("excited", 2000);
+        const pos = botPosRef.current;
+        spawnParticles("confetti", pos.x + 12, pos.y + 12, 18);
+      }
     } catch { /* */ }
-  }, [setTempMood, spawnParticles]);
+  }, [setTempMood, spawnParticles, isMobile]);
 
   // ── Cleanup ──
   useEffect(() => {

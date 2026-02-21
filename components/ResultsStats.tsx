@@ -24,22 +24,22 @@ function StatBar({ icon: Icon, label, before, after, percentage, color, delay }:
   useEffect(() => {
     if (!isInView) return;
     const timeout = setTimeout(() => {
-      let start = 0;
-      const end = percentage;
+      const start = performance.now();
       const duration = 1500;
-      const stepTime = 16;
-      const steps = duration / stepTime;
-      const increment = end / steps;
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= end) {
-          setCount(end);
-          clearInterval(timer);
-        } else {
-          setCount(Math.round(start));
+      const end = percentage;
+      let rafId: number;
+
+      const step = (now: number) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        setCount(Math.round(progress * end));
+        if (progress < 1) {
+          rafId = requestAnimationFrame(step);
         }
-      }, stepTime);
-      return () => clearInterval(timer);
+      };
+
+      rafId = requestAnimationFrame(step);
+      return () => cancelAnimationFrame(rafId);
     }, delay * 1000);
     return () => clearTimeout(timeout);
   }, [isInView, percentage, delay]);

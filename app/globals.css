@@ -240,6 +240,24 @@ body {
   .animate-pulse-glow {
     animation: none !important;
   }
+
+  /* Kill all infinite CSS animations to free up compositor */
+  * {
+    animation-duration: 0.5s !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  /* Except marquee which is lightweight and expected */
+  .animate-marquee-scroll {
+    animation-duration: 25s !important;
+    animation-iteration-count: infinite !important;
+  }
+
+  /* Reduce box-shadow complexity */
+  .glow-blue,
+  .glow-blue-sm {
+    box-shadow: none !important;
+  }
 }
 
 /* Custom Scrollbar */
