@@ -31,7 +31,7 @@ export default function ProjectsClient() {
         "Complete academic platform for educational services. Modern interface with course listings, student portal, and administrative features.",
       status: "Completed",
       tech: ["Next.js", "Dashboard", "Authentication", "Database"],
-      link: "https://mindspex-academic.vercel.app",
+      link: "https://www.lotusmindspexacademy.edu.lk",
       color: "#00FF88",
     },
     {
