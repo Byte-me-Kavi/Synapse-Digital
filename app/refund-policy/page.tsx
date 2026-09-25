@@ -255,7 +255,7 @@ export default function RefundPolicyPage() {
                     </a>
                   </p>
                   <p className="text-circuit-silver">
-                    Phone: <a href="tel:+94702735724" className="text-synapse-blue hover:underline">070 273 5724</a>
+                    Phone: <a href="tel:+94702735724" className="text-synapse-blue hover:underline">+94 70 273 5724</a>
                   </p>
                   <p className="text-circuit-silver">Kirulapone, Colombo 5, Sri Lanka</p>
                   <p className="text-circuit-silver text-sm mt-2">Available 24/7 - All Days</p>

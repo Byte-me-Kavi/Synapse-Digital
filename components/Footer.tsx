@@ -106,7 +106,7 @@ export default function Footer() {
                   href="tel:+94702735724"
                   className="text-circuit-silver hover:text-synapse-blue transition-colors duration-300 text-sm"
                 >
-                  070 273 5724
+                  +94 70 273 5724
                 </a>
               </motion.li>
               <motion.li
