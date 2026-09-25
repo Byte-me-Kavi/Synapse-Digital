@@ -241,7 +241,7 @@ export default function TermsPage() {
                       </a>
                     </p>
                     <p className="text-circuit-silver">
-                      Phone: <a href="tel:+94774671009" className="text-synapse-blue hover:underline">+94 77 467 1009</a>
+                      Phone: <a href="tel:+94702735724" className="text-synapse-blue hover:underline">070 273 5724</a>
                     </p>
                     <p className="text-circuit-silver">Kirulapone, Colombo 5, Sri Lanka</p>
                   </div>

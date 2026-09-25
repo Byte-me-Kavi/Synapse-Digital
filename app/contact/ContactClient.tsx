@@ -138,8 +138,8 @@ export default function ContactClient() {
     {
       icon: Phone,
       title: "Call Us",
-      content: "+94 77 467 1009",
-      link: "tel:+94774671009",
+      content: "070 273 5724",
+      link: "tel:+94702735724",
       color: "#00FF88",
     },
     {

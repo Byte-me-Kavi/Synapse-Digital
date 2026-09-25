@@ -103,23 +103,10 @@ export default function Footer() {
                 viewport={{ once: true }}
               >
                 <a
-                  href="tel:+94774671009"
+                  href="tel:+94702735724"
                   className="text-circuit-silver hover:text-synapse-blue transition-colors duration-300 text-sm"
                 >
-                  +94 77 467 1009
-                </a>
-              </motion.li>
-              <motion.li
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1 }}
-                viewport={{ once: true }}
-              >
-                <a
-                  href="tel:+94789910287"
-                  className="text-circuit-silver hover:text-synapse-blue transition-colors duration-300 text-sm"
-                >
-                  +94 78 991 0287
+                  070 273 5724
                 </a>
               </motion.li>
               <motion.li
