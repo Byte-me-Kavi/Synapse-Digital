@@ -135,7 +135,7 @@ const IDLE_MESSAGES: Record<string, { message: string; icon: React.ReactNode }[]
 const ACTIONS = [
   { icon: FiPhone, label: "Call Us", href: "tel:+94702735724", color: "#00FF88" },
   { icon: FiMessageCircle, label: "WhatsApp", href: "https://wa.me/94702735724", color: "#25D366" },
-  { icon: FiMail, label: "Email", href: "mailto:synapsedigitalofficial@gmail.com", color: "#00C2FF" },
+  { icon: FiMail, label: "Email", href: "mailto:synapsedigitaldev@gmail.com", color: "#00C2FF" },
   { icon: FiFileText, label: "Contact Form", href: "/contact", color: "#A855F7" },
 ];
 

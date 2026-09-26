@@ -90,10 +90,10 @@ export default function Footer() {
                 viewport={{ once: true }}
               >
                 <a
-                  href="mailto:synapsedigitalofficial@gmail.com"
+                  href="mailto:synapsedigitaldev@gmail.com"
                   className="text-circuit-silver hover:text-synapse-blue transition-colors duration-300 text-sm"
                 >
-                  synapsedigitalofficial@gmail.com
+                  synapsedigitaldev@gmail.com
                 </a>
               </motion.li>
               <motion.li

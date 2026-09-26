@@ -131,8 +131,8 @@ export default function ContactClient() {
     {
       icon: Mail,
       title: "Email Us",
-      content: "synapsedigitalofficial@gmail.com",
-      link: "mailto:synapsedigitalofficial@gmail.com",
+      content: "synapsedigitaldev@gmail.com",
+      link: "mailto:synapsedigitaldev@gmail.com",
       color: "#00C2FF",
     },
     {
