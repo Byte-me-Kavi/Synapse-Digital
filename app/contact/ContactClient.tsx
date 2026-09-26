@@ -176,7 +176,7 @@ export default function ContactClient() {
 
         {/* Hero Section */}
         <section className="relative min-h-[50vh] flex items-center justify-center w-full px-6 sm:px-8 lg:px-12 pt-32 pb-16">
-          <div className="w-full max-w-[1400px] mx-auto text-center">
+          <div className="w-full max-w-350 mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -199,7 +199,7 @@ export default function ContactClient() {
 
         {/* Contact Info Cards */}
         <section className="relative w-full py-12 px-6 sm:px-8 lg:px-12">
-          <div className="w-full max-w-[1400px] mx-auto">
+          <div className="w-full max-w-350 mx-auto">
             <h2 className="sr-only">Contact Information</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {contactInfo.map((info, index) => {
@@ -254,7 +254,7 @@ export default function ContactClient() {
 
         {/* Contact Form Section */}
         <section className="relative w-full py-20 px-6 sm:px-8 lg:px-12">
-          <div className="w-full max-w-[1400px] mx-auto">
+          <div className="w-full max-w-350 mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               {/* Left Column - Info */}
               <motion.div
@@ -343,7 +343,7 @@ export default function ContactClient() {
                           required
                           value={formData.name}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-signal-white placeholder-circuit-silver focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all"
+                          className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-signal-white placeholder-gray-500 focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all"
                           placeholder="Sarah Johnson"
                         />
                         {errors.name && (
@@ -364,7 +364,7 @@ export default function ContactClient() {
                           required
                           value={formData.email}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-signal-white placeholder-circuit-silver focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all"
+                          className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-signal-white placeholder-gray-500 focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all"
                           placeholder="sarah@company.com"
                         />
                         {errors.email && (
@@ -387,7 +387,7 @@ export default function ContactClient() {
                           name="company"
                           value={formData.company}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-signal-white placeholder-circuit-silver focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all"
+                          className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-signal-white placeholder-gray-500 focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all"
                           placeholder="Your Company Ltd."
                         />
                       </div>
@@ -404,7 +404,7 @@ export default function ContactClient() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-signal-white placeholder-circuit-silver focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all"
+                          className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-signal-white placeholder-gray-500 focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all"
                           placeholder="+94 77 123 4567"
                         />
                       </div>
@@ -517,7 +517,7 @@ export default function ContactClient() {
                         value={formData.message}
                         onChange={handleChange}
                         rows={6}
-                        className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-signal-white placeholder-circuit-silver focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all resize-none"
+                        className="w-full px-4 py-3 rounded-lg bg-void-black/50 border border-synapse-blue/30 text-signal-white placeholder-gray-500 focus:border-synapse-blue focus:outline-none focus:ring-2 focus:ring-synapse-blue/20 transition-all resize-none"
                         placeholder="Tell us about your project..."
                       />
                       {errors.message && (
@@ -567,7 +567,7 @@ export default function ContactClient() {
 
         {/* How We Work - Process Timeline */}
         <section className="relative w-full py-20 px-6 sm:px-8 lg:px-12">
-          <div className="w-full max-w-[1000px] mx-auto">
+          <div className="w-full max-w-250 mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -587,7 +587,7 @@ export default function ContactClient() {
             <div className="relative">
               {/* Vertical line (background - dim) */}
               <div
-                className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] md:-translate-x-[1px]"
+                className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 md:-translate-x-px"
                 style={{ backgroundColor: "rgba(0,194,255,0.1)" }}
               />
 
@@ -741,7 +741,7 @@ export default function ContactClient() {
                       {/* Energizing line segment */}
                       {index < 4 && (
                         <motion.div
-                          className="absolute left-1/2 -translate-x-1/2 top-12 w-[2px]"
+                          className="absolute left-1/2 -translate-x-1/2 top-12 w-0.5"
                           style={{
                             height: "calc(3rem + 48px)",
                             background: `linear-gradient(to bottom, ${step.color}, transparent)`,
@@ -768,7 +768,7 @@ export default function ContactClient() {
 
         {/* FAQ Section */}
         <section className="relative w-full py-20 px-6 sm:px-8 lg:px-12 bg-synapse-blue/5">
-          <div className="w-full max-w-[1000px] mx-auto">
+          <div className="w-full max-w-250 mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

@@ -149,7 +149,7 @@ let particleIdCounter = 0;
 function ParticleLayer({ particles }: { particles: Particle[] }) {
   if (particles.length === 0) return null;
   return (
-    <div className="fixed inset-0 z-[9996] pointer-events-none overflow-hidden">
+    <div className="fixed inset-0 z-9996 pointer-events-none overflow-hidden">
       {particles.map((p) => {
         if (p.type === "heart") {
           return (
@@ -550,7 +550,7 @@ export default function SynapseBot() {
   if (isDismissed) {
     return (
       <motion.button
-        className="fixed bottom-4 right-4 z-[9999] px-3 py-1.5 rounded-full bg-synapse-blue/20 border border-synapse-blue/30 text-synapse-blue text-xs font-semibold backdrop-blur-sm hover:bg-synapse-blue/30 transition-colors"
+        className="fixed bottom-4 right-4 z-9999 px-3 py-1.5 rounded-full bg-synapse-blue/20 border border-synapse-blue/30 text-synapse-blue text-xs font-semibold backdrop-blur-sm hover:bg-synapse-blue/30 transition-colors"
         onClick={() => setIsDismissed(false)}
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -567,7 +567,7 @@ export default function SynapseBot() {
 
       {/* Bot body */}
       <motion.div
-        className="fixed z-[9998] pointer-events-none"
+        className="fixed z-9998 pointer-events-none"
         style={isMobile ? { bottom: 20, right: 20 } : { x: springX, y: springY }}
       >
         {/* Speech bubble */}
@@ -578,7 +578,7 @@ export default function SynapseBot() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 5, scale: 0.9 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="absolute -top-16 right-0 pointer-events-none min-w-[180px] max-w-[230px]"
+              className="absolute -top-16 right-0 pointer-events-none min-w-45 max-w-57.5"
             >
               <div className="relative flex items-center gap-2 px-3 py-2 rounded-xl bg-[#111]/90 backdrop-blur-md border border-synapse-blue/30 text-signal-white text-[11px] leading-snug" style={{ boxShadow: "0 0 20px rgba(0,194,255,0.15)" }}>
                 {message}
@@ -673,7 +673,7 @@ export default function SynapseBot() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="fixed z-[9999] pointer-events-auto bottom-20 right-5"
+            className="fixed z-9999 pointer-events-auto bottom-20 right-5"
           >
             <div className="flex flex-col gap-2 p-3 rounded-2xl bg-[#0a0a0a]/95 backdrop-blur-xl border border-synapse-blue/20" style={{ boxShadow: "0 0 30px rgba(0,194,255,0.1)" }}>
               <div className="text-[10px] text-circuit-silver/60 font-semibold uppercase tracking-wider px-1 mb-1">Quick Actions</div>
@@ -705,7 +705,7 @@ export default function SynapseBot() {
         )}
       </AnimatePresence>
 
-      {isOpen && <div className="fixed inset-0 z-[9997]" onClick={() => setIsOpen(false)} />}
+      {isOpen && <div className="fixed inset-0 z-9997" onClick={() => setIsOpen(false)} />}
     </>
   );
 }

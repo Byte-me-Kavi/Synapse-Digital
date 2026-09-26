@@ -24,7 +24,7 @@ export default function RefundPolicyPage() {
 
         {/* Hero Section */}
         <section className="relative min-h-[40vh] flex items-center justify-center w-full px-6 sm:px-8 lg:px-12 pt-32 pb-16">
-          <div className="w-full max-w-[1400px] mx-auto text-center">
+          <div className="w-full max-w-350 mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ export default function RefundPolicyPage() {
 
         {/* Alert Section */}
         <section className="relative w-full py-8 px-6 sm:px-8 lg:px-12">
-          <div className="w-full max-w-[900px] mx-auto">
+          <div className="w-full max-w-225 mx-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -73,7 +73,7 @@ export default function RefundPolicyPage() {
 
         {/* Content Section */}
         <section className="relative w-full py-12 px-6 sm:px-8 lg:px-12 pb-20">
-          <div className="w-full max-w-[900px] mx-auto space-y-8">
+          <div className="w-full max-w-225 mx-auto space-y-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
