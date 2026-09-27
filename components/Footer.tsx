@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
-
+import { Github, Linkedin, Twitter, Mail, Facebook } from "lucide-react";
+import { FaTiktok } from "react-icons/fa6";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -27,10 +27,12 @@ export default function Footer() {
   };
 
   const socials = [
+    { icon: Facebook, href: "https://www.facebook.com/profile.php?id=61585913559432", label: "Facebook" },
+    { icon: FaTiktok, href: "https://www.tiktok.com/@synapse_digital_dev", label: "TikTok" },
     { icon: Github, href: "#", label: "GitHub" },
     { icon: Linkedin, href: "#", label: "LinkedIn" },
     { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Mail, href: "#", label: "Email" },
+    { icon: Mail, href: "mailto:synapsedigitaldev@gmail.com", label: "Email" },
   ];
 
   return (
